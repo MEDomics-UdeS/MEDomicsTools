@@ -39,7 +39,7 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
 - Indentation
   - Use 4 spaces per indentation level
 - Maximum Line Length
-  - 79 characters
+  - 120 characters (not 79 characters as specified in PEP8)
 - Blank Lines
   - Surround top-level function and class definitions with two blank lines
   - Method definitions inside a class are surrounded by a single blank line
