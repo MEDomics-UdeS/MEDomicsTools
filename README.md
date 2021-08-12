@@ -63,7 +63,7 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 
 ### R003: Variables, Functions and Classes Naming
 
-- Adopt "snake case" when naming variables, functions, methods and attributes.
+- Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
 - For functions and methods, start the name with an imperative action verb.
 - For class names, start each word with a capital letter.
 - Class names should represent an object or an actor that can execute concrete actions.
@@ -71,12 +71,19 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 Example:
 
 ```python
-# Variable Names
+# Variable Names Snake Case
 fruits_list = ['apple', 'banana', 'pineapple']
 area_under_curve = 34.6
 
-# Functions & Methods
+# Variable Names Camel Case
+fruitsList = ['apple', 'banana', 'pineapple']
+areaUnderCurve = 34.6
+
+# Functions & Methods Snake Case
 def calculate_area_under_curve(*args):
+
+# Functions & Methods Camel Case
+def calculateAreaUnderCurve(*args):
 
 # Classes
 class AreaCalculator:
