@@ -20,7 +20,7 @@ Operating System:
 - Ubuntu: https://ubuntu.com/
 - Pop!OS: https://pop.system76.com/
 - EndeavourOS: https://endeavouros.com/
-- Arch Linux: https://archlinux.org/
+- Arch Linux: https://archlinux.org/ (if you like to live dangerously)
 
 Package Suite & Environment Manager:
 - Anaconda: https://www.anaconda.com/products/individual
