@@ -142,3 +142,7 @@ Follow the Google docstring style: https://sphinxcontrib-napoleon.readthedocs.io
 ### R007: Comments
 
 Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention.
+
+### R008: String Quotes
+
+Use either ' OR " for strings delimiters, but not both.
