@@ -12,6 +12,21 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
 | -----------| ----------- |
 | 2021-08-08 | Creation |
 
+Todo:
+- Table of contents
+- Paths
+- More details on variable names (ie. equation variable), max chars of variable name
+- Enums
+- ABC
+- What is pythonic? List comprehension, etc.
+- Constants (all caps) vs Environment Variables
+- Multiprocessing
+- Check existing udes code standard & integrate contents
+- if __name__ == '__main__'
+- Encapsulation : protected vs private
+- Class inheritance vs aggregation
+- decorators : staticmethod classmethod abstractmethod
+
 ## Standard
 
 ### R000: Recommended Software
@@ -65,7 +80,8 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 ### R003: Variables, Functions and Classes Naming
 
 - Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
-- For functions and methods, start the name with an imperative action verb.
+- Use descriptive names for variables.
+- For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 
