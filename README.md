@@ -66,7 +66,7 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 
 - Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
 - For functions and methods, start the name with an imperative action verb.
-- For class names, start each word with a capital letter.
+- For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 
 Example:
@@ -86,7 +86,7 @@ def calculate_area_under_curve(*args):
 # Functions & Methods Camel Case
 def calculateAreaUnderCurve(*args):
 
-# Classes
+# Classes Pascal Case
 class AreaCalculator:
 ```
 
