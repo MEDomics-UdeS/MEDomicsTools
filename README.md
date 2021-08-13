@@ -1,6 +1,6 @@
 # MEDomicsUdeS Python Coding Standard
 
-This document presents the Python coding standard of the MEDomics_UdeS lab. It also contains cool tips, tricks and links to code efficiently in Python.
+This document presents the Python coding standard of the MEDomicsUdeS lab. It also contains cool tips, tricks and links to code efficiently in Python.
 
 ## Contributors
 
