@@ -45,6 +45,7 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
   - Method definitions inside a class are surrounded by a single blank line
   - Add a blank line at the end of each file
 - Imports: 
+  - Imports should be in alphabetical order.
   - Imports should usually be on separate lines.
   - Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
   - Imports should be grouped in the following order:
