@@ -13,7 +13,7 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
     + [R000 - Recommended Software](#r000---recommended-software)
     + [R001 - Style - PEP 8](#r001---style---pep-8)
     + [R002 - Project Repository Structure](#r002---project-repository-structure)
-    + [R003 - Variables - Functions - Classes Naming](#r003---variables---functions---classes-naming)
+    + [R003 - Naming Variables - Functions - Classes](#r003---naming-variables---functions---classes)
     + [R004 - f-strings](#r004---f-strings)
     + [R005 - Type Hinting - PEP 484](#r005---type-hinting---pep-484)
     + [R006 - Docstring - PEP 257 - Google Style](#r006---docstring---pep-257---google-style)
@@ -35,19 +35,19 @@ A        | 2021-08-08 | Creation    |
 
 ## To-Do
 
-- Table of contents
-- Paths
-- More details on variable names (ie. equation variable), max chars of variable name
-- Enums
-- ABC
-- What is pythonic? List comprehension, etc.
-- Constants (all caps) vs Environment Variables
-- Multiprocessing
-- Check existing udes code standard & integrate contents
-- if __name__ == '__main__'
-- Encapsulation : protected vs private
-- Class inheritance vs aggregation
-- decorators : staticmethod classmethod abstractmethod
+- [x] Table of contents
+- [ ] Paths
+- [ ] More details on variable names (ie. equation variable), max chars of variable name
+- [ ] Enums
+- [ ] ABC
+- [ ] What is pythonic? List comprehension, etc.
+- [ ] Constants (all caps) vs Environment Variables
+- [ ] Multiprocessing
+- [ ] Check existing udes code standard & integrate contents
+- [ ] if __name__ == '__main__'
+- [ ] Encapsulation : protected vs private
+- [ ] Class inheritance vs aggregation
+- [ ] decorators : staticmethod classmethod abstractmethod
 
 ## Standard
 
@@ -99,7 +99,7 @@ Use cookiecutter-datascience when creating a new repository. This utility create
 
 To use cookiecutter-datascience, follow the guide on this page: https://github.com/drivendata/cookiecutter-data-science
 
-### R003 - Variables - Functions - Classes Naming
+### R003 - Naming Variables - Functions - Classes 
 
 - Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
