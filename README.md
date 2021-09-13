@@ -15,6 +15,25 @@ A        | 2021-08-08 | Creation    |
 
 ## Table of Contents
 
+- [MEDomicsUdeS Python Coding Standard](#medomicsudes-python-coding-standard)
+  * [Contributors](#contributors)
+  * [Changelog](#changelog)
+  * [Table of Contents](#table-of-contents)
+  * [To-Do](#to-do)
+  * [Standard](#standard)
+    + [R000: Recommended Software](#r000--recommended-software)
+    + [R001: Style (PEP 8)](#r001--style--pep-8-)
+    + [R002: Project Repository Structure](#r002--project-repository-structure)
+    + [R003: Variables, Functions and Classes Naming](#r003--variables--functions-and-classes-naming)
+    + [R004: f-strings](#r004--f-strings)
+    + [R005: Type Hinting (PEP 484)](#r005--type-hinting--pep-484-)
+    + [R006: Docstring (PEP 257 + Google Style)](#r006--docstring--pep-257---google-style-)
+    + [R007: Comments](#r007--comments)
+    + [R008: String Quotes](#r008--string-quotes)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 ## To-Do
 
 - Table of contents
