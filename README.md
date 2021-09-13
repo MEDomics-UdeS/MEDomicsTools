@@ -8,11 +8,15 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
 
 ## Changelog
 
-| Date       | Description |
-| -----------| ----------- |
-| 2021-08-08 | Creation |
+Revision | Date       | Description |
+---------| -----------| ----------- |
+B        | 2021-09-13 | Updated based on team's comments    |
+A        | 2021-08-08 | Creation    |
 
-Todo:
+## Table of Contents
+
+## To-Do
+
 - Table of contents
 - Paths
 - More details on variable names (ie. equation variable), max chars of variable name
