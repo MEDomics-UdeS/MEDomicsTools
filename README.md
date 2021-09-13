@@ -185,3 +185,60 @@ Add a textual comment in English before each line or block of lines to help revi
 ### R008 - String Quotes
 
 Use either ' OR " for strings delimiters, but not both.
+
+### R009 - Pythonic - The Zen of Python - PEP 20
+
+The Zen of Python (from PEP 20: https://www.python.org/dev/peps/pep-0020/):
+```
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+Implement "Pythonic" code as much as possible, which means, for example:
+- Avoid using loops as much as possible, take advantage of the vectorized nature of the language. For example, to calculate the sum of numerical values inside a list:
+```python
+my_list = [50, 100, 150, 200]
+
+# Bad Non-Pythonic Unvectorized Way
+
+sum = 0
+
+for i in range(len(my_list)):
+    sum = sum + my_list[i]
+    
+# Good Pythonic Vectorized Way
+my_sum = sum(my_list)
+```
+- Use List Comprehension as much as possible. For example, to filter out a list:
+```python
+my_list = ['Apple', 'Orange', 'Cabbage', 'Orange']
+
+# Without List Comprehension
+
+filtered_list = []
+
+for item in my_list:
+    if item != 'Orange':
+        filtered_list.append(item)
+
+# With List Comprehension
+
+filtered_list = [item for item in my_list if item != 'Orange']
+```
