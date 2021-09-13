@@ -40,14 +40,15 @@ A        | 2021-08-08 | Creation    |
 - [ ] More details on variable names (ie. equation variable), max chars of variable name
 - [ ] Enums
 - [ ] ABC
-- [ ] What is pythonic? List comprehension, etc.
-- [ ] Constants (all caps) vs Environment Variables
-- [ ] Multiprocessing
+- [x] What is pythonic? List comprehension, etc.
+- [x] Constants (all caps) vs Environment Variables
+- [x] Multiprocessing
 - [ ] Check existing udes code standard & integrate contents
 - [ ] if __name__ == '__main__'
 - [ ] Encapsulation : protected vs private
 - [ ] Class inheritance vs aggregation
 - [ ] decorators : staticmethod classmethod abstractmethod
+- [ ] Reorder rules in a logic way
 
 ## Standard
 
@@ -106,6 +107,7 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 - For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
+- Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
 
 Example:
 
@@ -126,6 +128,10 @@ def calculateAreaUnderCurve(*args):
 
 # Classes Pascal Case
 class AreaCalculator:
+
+# Constants
+NUM_WORKERS = 24
+IMAGE_EXT = 'jpg'
 ```
 
 ### R004 - f-strings
@@ -242,3 +248,16 @@ for item in my_list:
 
 filtered_list = [item for item in my_list if item != 'Orange']
 ```
+### R010 - Multiprocessing and Compilation
+
+By default, Python uses a single CPU thread to perform calculations. In order to use the full potential of modern multithread CPU's, various multiprocessing libraries have been created. For example:
+- Built-in 'multiprocessing' library: https://docs.python.org/3/library/multiprocessing.html
+- Ray: https://ray.io/
+
+Python is an interpreted language, which makes the language multi-platform but this is a trade-off in terms of performance. Various libraries have been created to speed up computation by implementing Just-in-time (JIT) compilation for Python, for example:
+-Numba: http://numba.pydata.org/
+
+It is also possible to use the GPU to perform some calculations to improve performance, for example : 
+- CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
+
+### R011 - 
