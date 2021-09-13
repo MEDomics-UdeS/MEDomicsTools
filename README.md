@@ -51,7 +51,7 @@ A        | 2021-08-08 | Creation    |
 
 ## Standard
 
-### R000: Recommended Software
+### R000 - Recommended Software
 
 Operating System:
 - Ubuntu: https://ubuntu.com/
@@ -69,7 +69,7 @@ IDE:
 Deep Learning Framework:
 - PyTorch: https://pytorch.org/get-started/locally/
 
-### R001 - Style (PEP 8)
+### R001 - Style - PEP 8
 
 Follow all rules of the PEP 8 when coding in Python. The following list presents the most important aspects of PEP 8 to keep in mind when coding in Python. The detailed PEP can be found here: https://www.python.org/dev/peps/pep-0008/
 
@@ -99,7 +99,7 @@ Use cookiecutter-datascience when creating a new repository. This utility create
 
 To use cookiecutter-datascience, follow the guide on this page: https://github.com/drivendata/cookiecutter-data-science
 
-### R003: Variables, Functions and Classes Naming
+### R003: Variables - Functions - Classes Naming
 
 - Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
@@ -144,7 +144,7 @@ hourly_wage = 99.91 # Hourly wage in dollars
 print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
 ```
 
-### R005 - Type Hinting (PEP 484)
+### R005 - Type Hinting - PEP 484
 
 While Python is a dynamically typed language, PEP 484 was introduced to allow coders to specify argument and return value types for functions and methods. If a type is specified for a function argument, Python will not raise an exception: type hints are merely used to inform. Follow PEP 484 for all functions and methods, more details can be found at the following link: https://www.python.org/dev/peps/pep-0484/.
 
@@ -162,7 +162,7 @@ class BobTheBuilder:
     def __init__(self, has_hammer: bool = True) -> None:
         self.has_hammer = has_hammer
 ```
-### R006 - Docstring (PEP 257 + Google Style)
+### R006 - Docstring - PEP 257 - Google Style
 
 Write a docstring at the beginning of each Python .py file containing the following information:
 - File name
