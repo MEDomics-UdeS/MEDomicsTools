@@ -13,7 +13,7 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
     + [R000 - Recommended Software](#r000---recommended-software)
     + [R001 - Style - PEP 8](#r001---style---pep-8)
     + [R002 - Project Repository Structure](#r002---project-repository-structure)
-    + [R003: Variables - Functions - Classes Naming](#r003--variables---functions---classes-naming)
+    + [R003 - Variables - Functions - Classes Naming](#r003---variables---functions---classes-naming)
     + [R004 - f-strings](#r004---f-strings)
     + [R005 - Type Hinting - PEP 484](#r005---type-hinting---pep-484)
     + [R006 - Docstring - PEP 257 - Google Style](#r006---docstring---pep-257---google-style)
@@ -99,7 +99,7 @@ Use cookiecutter-datascience when creating a new repository. This utility create
 
 To use cookiecutter-datascience, follow the guide on this page: https://github.com/drivendata/cookiecutter-data-science
 
-### R003: Variables - Functions - Classes Naming
+### R003 - Variables - Functions - Classes Naming
 
 - Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
