@@ -260,4 +260,24 @@ Python is an interpreted language, which makes the language multi-platform but t
 It is also possible to use the GPU to perform some calculations to improve performance, for example : 
 - CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
 
-### R011 - 
+### R011 - Main
+
+In the main Python file that you execute, you should include the following construct between the imports and your code:
+
+```python
+# Imports
+
+if __name__ == '__main__':
+    # Code
+```
+This will make sure that if you import this main file to use some of its functions elsewhere, the main code block will not be executed during the importation.
+
+It is the equivalent of the following C++ main construct:
+```cpp
+// Imports
+
+int main() {
+    // Code
+    return 0;
+}
+```
