@@ -3,7 +3,6 @@
 This document presents the Python coding standard of the MEDomicsUdeS lab. It also contains cool tips, tricks and links to code efficiently in Python.
 
 ## Table of Contents
-
 - [MEDomicsUdeS Python Coding Standard](#medomicsudes-python-coding-standard)
   * [Table of Contents](#table-of-contents)
   * [Changelog](#changelog)
@@ -19,6 +18,9 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
     + [R006 - Docstring - PEP 257 - Google Style](#r006---docstring---pep-257---google-style)
     + [R007 - Comments](#r007---comments)
     + [R008 - String Quotes](#r008---string-quotes)
+    + [R009 - Pythonic - The Zen of Python - PEP 20](#r009---pythonic---the-zen-of-python---pep-20)
+    + [R010 - Multiprocessing and Compilation](#r010---multiprocessing-and-compilation)
+    + [R011 - Main](#r011---main)
 
 (To update the Table of Contents, use: https://ecotrust-canada.github.io/markdown-toc/)
 
@@ -44,7 +46,7 @@ A        | 2021-08-08 | Creation    |
 - [x] Constants (all caps) vs Environment Variables
 - [x] Multiprocessing
 - [ ] Check existing udes code standard & integrate contents
-- [ ] if __name__ == '__main__'
+- [x] if __name__ == '__main__'
 - [ ] Encapsulation : protected vs private
 - [ ] Class inheritance vs aggregation
 - [ ] decorators : staticmethod classmethod abstractmethod
@@ -255,7 +257,7 @@ By default, Python uses a single CPU thread to perform calculations. In order to
 - Ray: https://ray.io/
 
 Python is an interpreted language, which makes the language multi-platform but this is a trade-off in terms of performance. Various libraries have been created to speed up computation by implementing Just-in-time (JIT) compilation for Python, for example:
--Numba: http://numba.pydata.org/
+- Numba: http://numba.pydata.org/
 
 It is also possible to use the GPU to perform some calculations to improve performance, for example : 
 - CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
