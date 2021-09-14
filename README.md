@@ -24,6 +24,9 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
     + [R012 - Paths - Working Directory](#r012---paths---working-directory)
     + [R013 - Enumerations - PEP 435](#r013---enumerations---pep-435)
     + [R014 - Abstract Classes - PEP 3119](#r014---abstract-classes---pep-3119)
+    + [R015 - Universite de Sherbrooke Computer Science Department Programming Standard](#r015---universite-de-sherbrooke-computer-science-department-programming-standard)
+    + [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
+    + [R017 - Decorators](#r017---decorators)
 
 NOTES: 
 
@@ -51,9 +54,9 @@ A        | 2021-08-08 | Creation    |
 - [x] What is pythonic? List comprehension, etc.
 - [x] Constants (all caps) vs Environment Variables
 - [x] Multiprocessing
-- [ ] Check existing udes code standard & integrate contents
+- [x] Check existing udes code standard & integrate contents
 - [x] if __name__ == '__main__'
-- [ ] Encapsulation : protected vs private
+- [x] Encapsulation : protected vs private
 - [ ] Class inheritance vs aggregation
 - [ ] decorators : staticmethod classmethod abstractmethod
 - [ ] Reorder rules in a logic way
@@ -361,4 +364,77 @@ class AbstractClass(ABC):
 Read the standard library documentation: https://docs.python.org/3/library/abc.html
 
 Read PEP 3119: https://www.python.org/dev/peps/pep-3119/
+
+### R015 - Universite de Sherbrooke Computer Science Department Programming Standard
+
+The Université de Sherbrooke Computer Science Department created a programming standard in 2004 for the C++ and Java languages. It contains general good practices and guidelines for writing clear and concise code.
+
+Refer to the following document: 
+https://www.usherbrooke.ca/informatique/fileadmin/sites/informatique/documents/Intranet/Documentation_informatique/Normes_de_programmation/normes-de-programmation-1.pdf
+
+### R016 - Encapsulation - Private vs Protected vs Public
+
+In Python, encapsulation can be implemented in classes so that some attributes or methods can be public, protected or private:
+- Public: can be accessed from inside the class, outside the class and child classes (no underscore before name)
+- Protected: can be accessed from inside the class and child classes (1 underscore before name)
+- Private: can be accessed from inside the class only (2 underscores before name)
+
+Example:
+
+```python
+class MyClass:
+    def __init__(self):
+        self.x = 4   # Public Attribute
+        self._y = 6  # Protected Attribute
+        self.__z = 8 # Private Attribute
+
+    # Public Method
+    def get_product_x_y(self):
+        return self.x * self._y
+        
+    # Protected Method
+    def _get_product_x_z(self):
+        return self.x * self.__z
+        
+    # Private Method
+    def __get_product_y_z(self):
+        return self._y * self.__z
+        
+my_object = MyClass()
+
+my_object.x   # Can be read
+my_object._y  # Cannot be read
+my_object.__z # Cannot be read
+
+prod = my_object.get_product_x_y()   # Can be used
+prod = my_object._get_product_x_z()  # Cannot be used
+prod = my_object.__get_product_y_z() # Cannot be used
+```
+
+To implement an attribute as read-only, which means it can be read from outside the class but not changed from outside the class, you can make it private and use a @property decorator, for example:
+
+```python
+class MyClass:
+    def __init__(self):
+        self.__x = 4   # Private Attribute
+
+    @property
+    def x(self):
+        return self.__x
+        
+my_object = MyClass()
+
+my_object.x # self.__x can be accessed as read only
+```
+
+### R017 - Decorators
+
+@abstractmethod
+
+@staticmethod
+
+@classmethod
+
+@property
+
 
