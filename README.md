@@ -21,8 +21,14 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
     + [R009 - Pythonic - The Zen of Python - PEP 20](#r009---pythonic---the-zen-of-python---pep-20)
     + [R010 - Multiprocessing and Compilation](#r010---multiprocessing-and-compilation)
     + [R011 - Main](#r011---main)
+    + [R012 - Paths - Working Directory](#r012---paths---working-directory)
+    + [R013 - Enumerations - PEP 435](#r013---enumerations---pep-435)
+    + [R014 - Abstract Classes - PEP 3119](#r014---abstract-classes---pep-3119)
 
-(To update the Table of Contents, use: https://ecotrust-canada.github.io/markdown-toc/)
+NOTES: 
+
+- To update the Table of Contents, use: https://ecotrust-canada.github.io/markdown-toc/
+- Section headers cannot contain special characters other than -, otherwise the TOC hyperlinks will not work
 
 ## Changelog
 
@@ -38,10 +44,10 @@ A        | 2021-08-08 | Creation    |
 ## To-Do
 
 - [x] Table of contents
-- [ ] Paths
-- [ ] More details on variable names (ie. equation variable), max chars of variable name
-- [ ] Enums
-- [ ] ABC
+- [x] Paths
+- [x] More details on variable names (ie. equation variable), max chars of variable name
+- [x] Enums
+- [x] ABC
 - [x] What is pythonic? List comprehension, etc.
 - [x] Constants (all caps) vs Environment Variables
 - [x] Multiprocessing
@@ -110,8 +116,10 @@ To use cookiecutter-datascience, follow the guide on this page: https://github.c
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 - Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
+- When dealing with an equation, use variable names that match the variables of the equation itself, for example use 'alpha' or 'beta'.
+- Keep the names of variables, functions and classes within a reasonable length (25-30 characters max.)
 
-Example:
+Examples:
 
 ```python
 # Variable Names Snake Case
@@ -134,6 +142,10 @@ class AreaCalculator:
 # Constants
 NUM_WORKERS = 24
 IMAGE_EXT = 'jpg'
+
+# Equations
+def calculate_y(m: float, x: float, b: float) -> float:
+    return m * x + b
 ```
 
 ### R004 - f-strings
@@ -283,3 +295,70 @@ int main() {
     return 0;
 }
 ```
+### R012 - Paths - Working Directory
+
+Normally, you should place the main Python file to be executed in the root of the repository, which is the working directory, and imports should refer to files that are present in a 'src' folder. For example, if you want to import MyClass from the 'src/data/utils.py' file, your import statement should be written as such:
+
+```python
+from src.data.utils import MyClass
+```
+
+You can use different methods of the 'os' library to get or change the working directory path, for example:
+
+```python
+# To get the current working directory
+path = os.getcwd()
+
+# To change the working directory (ie. move back 1 folder)
+os.chdir('..')
+```
+
+### R013 - Enumerations - PEP 435
+
+Enumerations allow a simple interface between human-readable string values and numerical values. For example, if you want your class to have a method with a color as an argument, you can specify all possible colors using an enumeration, each being associated to an integer value. This can improve the interactibility and optimize your classes.
+
+Read the standard library documentation on enumerations: https://docs.python.org/3/library/enum.html
+
+```
+An enumeration is a set of symbolic names (members) bound to unique, constant values. Within an enumeration, the members can be compared by identity, and the enumeration itself can be iterated over.
+
+Because Enums are used to represent constants we recommend using UPPER_CASE names for enum members, and will be using that style in our examples.
+```
+
+```python
+from enum import Enum
+
+class Color(Enum):
+    RED = 1
+    GREEN = 2
+    BLUE = 3
+```
+
+Guide on when to use Enums: https://stackoverflow.com/questions/37601644/python-whats-the-enum-type-good-for
+
+```
+When should I use enum.Enum?
+
+Use it anywhere you have a canonical source of enumerated data in your code where you want explicitly specified to use the canonical name, instead of arbitrary data.
+
+For example, if in your code you want users to state that it's not "Green", "green", 2, or "Greene", but Color.green - use the enum.Enum object. It's both explicit and specific.
+
+```
+
+Read PEP 435: https://www.python.org/dev/peps/pep-0435/
+
+### R014 - Abstract Classes - PEP 3119
+
+To implement an abstract class in Python, which is a signature class that cannot be instanced itself but only its child classes can be, you can use the 'abc' library (ABC : Abstract Base Class):
+
+```python
+from abc import ABC
+
+class AbstractClass(ABC):
+    pass
+```
+
+Read the standard library documentation: https://docs.python.org/3/library/abc.html
+
+Read PEP 3119: https://www.python.org/dev/peps/pep-3119/
+
