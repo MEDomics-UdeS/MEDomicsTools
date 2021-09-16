@@ -58,7 +58,7 @@ A        | 2021-08-08 | Creation    |
 - [x] if __name__ == '__main__'
 - [x] Encapsulation : protected vs private
 - [ ] Class inheritance vs aggregation
-- [ ] decorators : staticmethod classmethod abstractmethod
+- [x] decorators : staticmethod classmethod abstractmethod
 - [ ] Reorder rules in a logic way
 
 ## Standard
@@ -383,7 +383,7 @@ Example:
 
 ```python
 class MyClass:
-    def __init__(self):
+    def __init__(self) -> None:
         self.x = 4   # Public Attribute
         self._y = 6  # Protected Attribute
         self.__z = 8 # Private Attribute
@@ -415,7 +415,7 @@ To implement an attribute as read-only, which means it can be read from outside 
 
 ```python
 class MyClass:
-    def __init__(self):
+    def __init__(self) -> None:
         self.__x = 4   # Private Attribute
 
     @property
@@ -429,12 +429,26 @@ my_object.x # self.__x can be accessed as read only
 
 ### R017 - Decorators
 
-@abstractmethod
+In Python, decorators are wrappers that are specified above a function definition with an @. The following is a list of common decorators used in Python:
 
-@staticmethod
+- @abstractmethod: To force a certain abstract method to be defined in child classes inheriting from an abstract parent class.
+```python
+from abc import ABC
 
-@classmethod
+class MyAbstractClass(ABC):
+    def __init__(self) -> None:
+        pass
+    
+    @abstractmethod
+    def calculate_area(x: int, y, int) -> int:
 
-@property
+```
 
+- @staticmethod
+
+- @classmethod
+
+- @property
+
+- @torch.no_grad()
 
