@@ -10,21 +10,21 @@ This document presents the Python coding standard of the MEDomicsUdeS lab. It al
   * [To-Do](#to-do)
   * [Standard](#standard)
     + [R000 - Recommended Software](#r000---recommended-software)
-    + [R001 - Style - PEP 8](#r001---style---pep-8)
+    + [R001 - Universite de Sherbrooke Computer Science Department Programming Standard](#r001---universite-de-sherbrooke-computer-science-department-programming-standard)
     + [R002 - Project Repository Structure](#r002---project-repository-structure)
-    + [R003 - Naming Variables - Functions - Classes](#r003---naming-variables---functions---classes)
-    + [R004 - f-strings](#r004---f-strings)
-    + [R005 - Type Hinting - PEP 484](#r005---type-hinting---pep-484)
-    + [R006 - Docstring - PEP 257 - Google Style](#r006---docstring---pep-257---google-style)
-    + [R007 - Comments](#r007---comments)
-    + [R008 - String Quotes](#r008---string-quotes)
-    + [R009 - Pythonic - The Zen of Python - PEP 20](#r009---pythonic---the-zen-of-python---pep-20)
-    + [R010 - Multiprocessing and Compilation](#r010---multiprocessing-and-compilation)
-    + [R011 - Main](#r011---main)
-    + [R012 - Paths - Working Directory](#r012---paths---working-directory)
-    + [R013 - Enumerations - PEP 435](#r013---enumerations---pep-435)
-    + [R014 - Abstract Classes - PEP 3119](#r014---abstract-classes---pep-3119)
-    + [R015 - Universite de Sherbrooke Computer Science Department Programming Standard](#r015---universite-de-sherbrooke-computer-science-department-programming-standard)
+    + [R003 - Pythonic - The Zen of Python - PEP 20](#r003---pythonic---the-zen-of-python---pep-20)
+    + [R004 - Main](#r004---main)
+    + [R005 - Paths - Working Directory](#r005---paths---working-directory)
+    + [R006 - Style - PEP 8](#r006---style---pep-8)
+    + [R007 - Naming Variables - Functions - Classes](#r007---naming-variables---functions---classes)
+    + [R008 - Type Hinting - PEP 484](#r008---type-hinting---pep-484)
+    + [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
+    + [R010 - Comments](#r010---comments)
+    + [R011 - String Quotes](#r011---string-quotes)
+    + [R012 - f-strings](#r012---f-strings)
+    + [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
+    + [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
+    + [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
     + [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
     + [R017 - Decorators](#r017---decorators)
 
@@ -57,9 +57,9 @@ A        | 2021-08-08 | Creation    |
 - [x] Check existing udes code standard & integrate contents
 - [x] if __name__ == '__main__'
 - [x] Encapsulation : protected vs private
+- [x] Reorder rules in a logic way
 - [ ] Class inheritance vs aggregation
-- [x] decorators : staticmethod classmethod abstractmethod
-- [ ] Reorder rules in a logic way
+- [ ] decorators : staticmethod classmethod abstractmethod
 
 ## Standard
 
@@ -81,29 +81,12 @@ IDE:
 Deep Learning Framework:
 - PyTorch: https://pytorch.org/get-started/locally/
 
-### R001 - Style - PEP 8
+### R001 - Universite de Sherbrooke Computer Science Department Programming Standard
 
-Follow all rules of the PEP 8 when coding in Python. The following list presents the most important aspects of PEP 8 to keep in mind when coding in Python. The detailed PEP can be found here: https://www.python.org/dev/peps/pep-0008/
+The Université de Sherbrooke Computer Science Department created a programming standard in 2004 for the C++ and Java languages. It contains general good practices and guidelines for writing clear and concise code.
 
-- Indentation
-  - Use 4 spaces per indentation level
-- Maximum Line Length
-  - 120 characters (not 79 characters as specified in PEP8)
-- Blank Lines
-  - Surround top-level function and class definitions with two blank lines
-  - Method definitions inside a class are surrounded by a single blank line
-  - Add a blank line at the end of each file
-- Imports: 
-  - Imports should be in alphabetical order.
-  - Imports should usually be on separate lines.
-  - Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
-  - Imports should be grouped in the following order:
-    - Standard library imports.
-    - Related third party imports.
-    - Local application/library specific imports.
-    - You should put a blank line between each group of imports.
-
-To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checker, such as PyCharm or Visual Studio Code.
+Refer to the following document: 
+https://www.usherbrooke.ca/informatique/fileadmin/sites/informatique/documents/Intranet/Documentation_informatique/Normes_de_programmation/normes-de-programmation-1.pdf
 
 ### R002 - Project Repository Structure
 
@@ -111,105 +94,7 @@ Use cookiecutter-datascience when creating a new repository. This utility create
 
 To use cookiecutter-datascience, follow the guide on this page: https://github.com/drivendata/cookiecutter-data-science
 
-### R003 - Naming Variables - Functions - Classes 
-
-- Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
-- Use descriptive names for variables.
-- For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
-- For class names, start each word with a capital letter (Pascal case).
-- Class names should represent an object or an actor that can execute concrete actions.
-- Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
-- When dealing with an equation, use variable names that match the variables of the equation itself, for example use 'alpha' or 'beta'.
-- Keep the names of variables, functions and classes within a reasonable length (25-30 characters max.)
-
-Examples:
-
-```python
-# Variable Names Snake Case
-fruits_list = ['apple', 'banana', 'pineapple']
-area_under_curve = 34.6
-
-# Variable Names Camel Case
-fruitsList = ['apple', 'banana', 'pineapple']
-areaUnderCurve = 34.6
-
-# Functions & Methods Snake Case
-def calculate_area_under_curve(*args):
-
-# Functions & Methods Camel Case
-def calculateAreaUnderCurve(*args):
-
-# Classes Pascal Case
-class AreaCalculator:
-
-# Constants
-NUM_WORKERS = 24
-IMAGE_EXT = 'jpg'
-
-# Equations
-def calculate_y(m: float, x: float, b: float) -> float:
-    return m * x + b
-```
-
-### R004 - f-strings
-
-The most useful way to manage strings in Python is the f-string, which was introduced in Python 3.6. Use f-strings whenever possible to enhance code readability. More details can be found at the following link: https://docs.python.org/3/reference/lexical_analysis.html#f-strings.
-
-Example:
-
-```python
-builder_name = "Bob"
-
-print(f'Hi there, my name is {builder_name}')
-
-hourly_wage = 99.91 # Hourly wage in dollars
-
-print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
-```
-
-### R005 - Type Hinting - PEP 484
-
-While Python is a dynamically typed language, PEP 484 was introduced to allow coders to specify argument and return value types for functions and methods. If a type is specified for a function argument, Python will not raise an exception: type hints are merely used to inform. Follow PEP 484 for all functions and methods, more details can be found at the following link: https://www.python.org/dev/peps/pep-0484/.
-
-Example:
-
-```python
-def greeting(name: str) -> str:
-    return 'Hello ' + name
-```
-
-Even for class constructors, specify return type as None. For example:
-
-```python
-class BobTheBuilder:
-    def __init__(self, has_hammer: bool = True) -> None:
-        self.has_hammer = has_hammer
-```
-### R006 - Docstring - PEP 257 - Google Style
-
-Write a docstring at the beginning of each Python .py file containing the following information:
-- File name
-- Authors
-- Description
-- Date of last modification
-
-Write a docstring at the beginning of each class describing the general purpose of the class.
-
-Write a docstring at the beginning of each function or method to describe the function/method purpose, arguments type and expected values and return type and expected values. Place this docstring right after the defintion of the function/method.
-
-Follow PEP 257: https://www.python.org/dev/peps/pep-0257/
-
-Follow the Google docstring style: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
-
-### R007 - Comments
-
-Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention.
-
-### R008 - String Quotes
-
-Use either ' OR " for strings delimiters, but not both.
-
-### R009 - Pythonic - The Zen of Python - PEP 20
+### R003 - Pythonic - The Zen of Python - PEP 20
 
 The Zen of Python (from PEP 20: https://www.python.org/dev/peps/pep-0020/):
 ```
@@ -265,19 +150,8 @@ for item in my_list:
 
 filtered_list = [item for item in my_list if item != 'Orange']
 ```
-### R010 - Multiprocessing and Compilation
 
-By default, Python uses a single CPU thread to perform calculations. In order to use the full potential of modern multithread CPU's, various multiprocessing libraries have been created. For example:
-- Built-in 'multiprocessing' library: https://docs.python.org/3/library/multiprocessing.html
-- Ray: https://ray.io/
-
-Python is an interpreted language, which makes the language multi-platform but this is a trade-off in terms of performance. Various libraries have been created to speed up computation by implementing Just-in-time (JIT) compilation for Python, for example:
-- Numba: http://numba.pydata.org/
-
-It is also possible to use the GPU to perform some calculations to improve performance, for example : 
-- CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
-
-### R011 - Main
+### R004 - Main
 
 In the main Python file that you execute, you should include the following construct between the imports and your code:
 
@@ -298,7 +172,8 @@ int main() {
     return 0;
 }
 ```
-### R012 - Paths - Working Directory
+
+### R005 - Paths - Working Directory
 
 Normally, you should place the main Python file to be executed in the root of the repository, which is the working directory, and imports should refer to files that are present in a 'src' folder. For example, if you want to import MyClass from the 'src/data/utils.py' file, your import statement should be written as such:
 
@@ -316,7 +191,142 @@ path = os.getcwd()
 os.chdir('..')
 ```
 
-### R013 - Enumerations - PEP 435
+### R006 - Style - PEP 8
+
+Follow all rules of the PEP 8 when coding in Python. The following list presents the most important aspects of PEP 8 to keep in mind when coding in Python. The detailed PEP can be found here: https://www.python.org/dev/peps/pep-0008/
+
+- Indentation
+  - Use 4 spaces per indentation level
+- Maximum Line Length
+  - 120 characters (not 79 characters as specified in PEP8)
+- Blank Lines
+  - Surround top-level function and class definitions with two blank lines
+  - Method definitions inside a class are surrounded by a single blank line
+  - Add a blank line at the end of each file
+- Imports: 
+  - Imports should be in alphabetical order.
+  - Imports should usually be on separate lines.
+  - Imports are always put at the top of the file, just after any module comments and docstrings, and before module globals and constants.
+  - Imports should be grouped in the following order:
+    - Standard library imports.
+    - Related third party imports.
+    - Local application/library specific imports.
+    - You should put a blank line between each group of imports.
+
+To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checker, such as PyCharm or Visual Studio Code.
+
+### R007 - Naming Variables - Functions - Classes 
+
+- Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
+- Use descriptive names for variables.
+- For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
+- For class names, start each word with a capital letter (Pascal case).
+- Class names should represent an object or an actor that can execute concrete actions.
+- Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
+- When dealing with an equation, use variable names that match the variables of the equation itself, for example use 'alpha' or 'beta'.
+- Keep the names of variables, functions and classes within a reasonable length (25-30 characters max.)
+
+Examples:
+
+```python
+# Variable Names Snake Case
+fruits_list = ['apple', 'banana', 'pineapple']
+area_under_curve = 34.6
+
+# Variable Names Camel Case
+fruitsList = ['apple', 'banana', 'pineapple']
+areaUnderCurve = 34.6
+
+# Functions & Methods Snake Case
+def calculate_area_under_curve(*args):
+
+# Functions & Methods Camel Case
+def calculateAreaUnderCurve(*args):
+
+# Classes Pascal Case
+class AreaCalculator:
+
+# Constants
+NUM_WORKERS = 24
+IMAGE_EXT = 'jpg'
+
+# Equations
+def calculate_y(m: float, x: float, b: float) -> float:
+    return m * x + b
+```
+
+### R008 - Type Hinting - PEP 484
+
+While Python is a dynamically typed language, PEP 484 was introduced to allow coders to specify argument and return value types for functions and methods. If a type is specified for a function argument, Python will not raise an exception: type hints are merely used to inform. Follow PEP 484 for all functions and methods, more details can be found at the following link: https://www.python.org/dev/peps/pep-0484/.
+
+Example:
+
+```python
+def greeting(name: str) -> str:
+    return 'Hello ' + name
+```
+
+Even for class constructors, specify return type as None. For example:
+
+```python
+class BobTheBuilder:
+    def __init__(self, has_hammer: bool = True) -> None:
+        self.has_hammer = has_hammer
+```
+
+### R009 - Docstring - PEP 257 - Google Style
+
+Write a docstring at the beginning of each Python .py file containing the following information:
+- File name
+- Authors
+- Description
+- Date of last modification
+
+Write a docstring at the beginning of each class describing the general purpose of the class.
+
+Write a docstring at the beginning of each function or method to describe the function/method purpose, arguments type and expected values and return type and expected values. Place this docstring right after the defintion of the function/method.
+
+Follow PEP 257: https://www.python.org/dev/peps/pep-0257/
+
+Follow the Google docstring style: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
+
+### R010 - Comments
+
+Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention.
+
+### R011 - String Quotes
+
+Use either ' OR " for strings delimiters, but not both.
+
+### R012 - f-strings
+
+The most useful way to manage strings in Python is the f-string, which was introduced in Python 3.6. Use f-strings whenever possible to enhance code readability. More details can be found at the following link: https://docs.python.org/3/reference/lexical_analysis.html#f-strings.
+
+Example:
+
+```python
+builder_name = "Bob"
+
+print(f'Hi there, my name is {builder_name}')
+
+hourly_wage = 99.91 # Hourly wage in dollars
+
+print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
+```
+
+### R013 - Multiprocessing and Compilation
+
+By default, Python uses a single CPU thread to perform calculations. In order to use the full potential of modern multithread CPU's, various multiprocessing libraries have been created. For example:
+- Built-in 'multiprocessing' library: https://docs.python.org/3/library/multiprocessing.html
+- Ray: https://ray.io/
+
+Python is an interpreted language, which makes the language multi-platform but this is a trade-off in terms of performance. Various libraries have been created to speed up computation by implementing Just-in-time (JIT) compilation for Python, for example:
+- Numba: http://numba.pydata.org/
+
+It is also possible to use the GPU to perform some calculations to improve performance, for example : 
+- CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
+
+### R014 - Enumerations - PEP 435
 
 Enumerations allow a simple interface between human-readable string values and numerical values. For example, if you want your class to have a method with a color as an argument, you can specify all possible colors using an enumeration, each being associated to an integer value. This can improve the interactibility and optimize your classes.
 
@@ -345,12 +355,11 @@ When should I use enum.Enum?
 Use it anywhere you have a canonical source of enumerated data in your code where you want explicitly specified to use the canonical name, instead of arbitrary data.
 
 For example, if in your code you want users to state that it's not "Green", "green", 2, or "Greene", but Color.green - use the enum.Enum object. It's both explicit and specific.
-
 ```
 
 Read PEP 435: https://www.python.org/dev/peps/pep-0435/
 
-### R014 - Abstract Classes - PEP 3119
+### R015 - Abstract Classes - PEP 3119
 
 To implement an abstract class in Python, which is a signature class that cannot be instanced itself but only its child classes can be, you can use the 'abc' library (ABC : Abstract Base Class):
 
@@ -364,13 +373,6 @@ class AbstractClass(ABC):
 Read the standard library documentation: https://docs.python.org/3/library/abc.html
 
 Read PEP 3119: https://www.python.org/dev/peps/pep-3119/
-
-### R015 - Universite de Sherbrooke Computer Science Department Programming Standard
-
-The Université de Sherbrooke Computer Science Department created a programming standard in 2004 for the C++ and Java languages. It contains general good practices and guidelines for writing clear and concise code.
-
-Refer to the following document: 
-https://www.usherbrooke.ca/informatique/fileadmin/sites/informatique/documents/Intranet/Documentation_informatique/Normes_de_programmation/normes-de-programmation-1.pdf
 
 ### R016 - Encapsulation - Private vs Protected vs Public
 
