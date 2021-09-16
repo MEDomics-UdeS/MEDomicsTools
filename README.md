@@ -431,7 +431,7 @@ my_object.x # self.__x can be accessed as read only
 
 In Python, decorators are wrappers that are specified above a function definition with an @. The following is a list of common decorators used in Python:
 
-- @abstractmethod: To force a certain abstract method to be defined in child classes inheriting from an abstract parent class.
+- @abstractmethod: To force a certain abstract method to be defined in all child classes that inherit from an abstract parent class.
 ```python
 from abc import ABC
 
@@ -440,15 +440,30 @@ class MyAbstractClass(ABC):
         pass
     
     @abstractmethod
-    def calculate_area(x: int, y, int) -> int:
-
+    def calculate_area(self, x: int, y, int) -> int:
+        pass
 ```
 
-- @staticmethod
+- @staticmethod: When access to the object iself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
+```python
+class MyClass:
+    def __init__(self) -> None:
+        self.x = 40
+    
+    def calculate_area(self, y: float) -> float:
+        return self.x * y
+    
+    @staticmethod
+    def calculate_new_area(x: float, y: float) -> float:
+        return x * y
+```
 
 - @classmethod
 
+To Do
+
 - @property
 
-- @torch.no_grad()
+To Do (already in other rule pertaining to encapsulation & private attributes)
 
+- @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
