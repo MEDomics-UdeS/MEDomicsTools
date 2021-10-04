@@ -60,6 +60,10 @@ A        | 2021-08-08 | Creation    |
 - [x] Reorder rules in a logic way
 - [ ] Class inheritance vs aggregation
 - [ ] decorators : staticmethod classmethod abstractmethod
+- [ ] Function/method calls : specify 1 or multiple arguments per line?
+- [ ] Use 'pipreqs' package to generate project 'requirements.txt' file
+- [ ] Start file and folder names in repository with lower case letters
+- [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments
 
 ## Standard
 
