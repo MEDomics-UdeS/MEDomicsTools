@@ -37,13 +37,10 @@ NOTES:
 
 Revision | Date       | Description |
 ---------| -----------| ----------- |
+D        | 2021-12-01 | Updated based on team's comments    |
 C        | 2021-10-04 | Added new items in to-do list    |
 B        | 2021-09-13 | Updated based on team's comments    |
 A        | 2021-08-08 | Creation    |
-
-## Contributors
-
-- [Simon Giard-Leroux](https://github.com/sgiardl)
 
 ## To-Do
 
@@ -59,12 +56,20 @@ A        | 2021-08-08 | Creation    |
 - [x] if __name__ == '__main__'
 - [x] Encapsulation : protected vs private
 - [x] Reorder rules in a logic way
-- [ ] Class inheritance vs aggregation
-- [ ] decorators : staticmethod classmethod abstractmethod
-- [ ] Function/method calls : specify 1 or multiple arguments per line?
-- [ ] Use 'pipreqs' package to generate project 'requirements.txt' file
-- [ ] Start file and folder names in repository with lower case letters
-- [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments
+- [ ] Class inheritance vs aggregation (Mahdi)
+- [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
+- [ ] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
+- [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
+- [ ] Start file and folder names in repository with lower case letters (Alex)
+- [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
+- [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
+- [ ] Lines wrapping/continuation (Mahdi)
+- [ ] r-strings (Mahdi)
+- [ ] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
+- [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
+- [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
+- [ ] Add linux section (Achille + Guillaume, alias+bashrc: Simon + Nicolas)
+- [ ] Add postgresql section (Olivier + Nicolas)
 
 ## Standard
 
@@ -82,6 +87,7 @@ Package Suite & Environment Manager:
 IDE:
 - PyCharm Professional (free for students): https://www.jetbrains.com/shop/eform/students
 - Visual Studio Code: https://code.visualstudio.com
+ - Use 'pylint' for automatic PEP 8 syntax checking: https://code.visualstudio.com/docs/python/linting
 
 Deep Learning Framework:
 - PyTorch: https://pytorch.org/get-started/locally/
@@ -200,8 +206,11 @@ os.chdir('..')
 
 Follow all rules of the PEP 8 when coding in Python. The following list presents the most important aspects of PEP 8 to keep in mind when coding in Python. The detailed PEP can be found here: https://www.python.org/dev/peps/pep-0008/
 
+- For PyCharm, the settings can be changed in the 'Settings > Editor > Code Style' menu
+- For Visual Studio Code, the settings can be changed in the 'settings.json' file (see https://code.visualstudio.com/docs/python/linting)
+
 - Indentation
-  - Use 4 spaces per indentation level
+  - Use 4 spaces per indentation level (don't use tabs, use spaces, see https://www.python.org/dev/peps/pep-0008/#tabs-or-spaces)
 - Maximum Line Length
   - 120 characters (not 79 characters as specified in PEP8)
 - Blank Lines
@@ -222,7 +231,7 @@ To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checke
 
 ### R007 - Naming Variables - Functions - Classes 
 
-- Adopt "snake case" OR "camel case" (but not both) when naming variables, functions, methods and attributes.
+- Adopt "snake_case" OR "camelCase" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
 - For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
 - For class names, start each word with a capital letter (Pascal case).
@@ -287,13 +296,15 @@ Write a docstring at the beginning of each Python .py file containing the follow
 - Description
 - Date of last modification
 
-Write a docstring at the beginning of each class describing the general purpose of the class.
+Write a docstring at the beginning of each class describing the general purpose of the class, the public methods and public attributes available.
 
 Write a docstring at the beginning of each function or method to describe the function/method purpose, arguments type and expected values and return type and expected values. Place this docstring right after the defintion of the function/method.
 
 Follow PEP 257: https://www.python.org/dev/peps/pep-0257/
 
-Follow the Google docstring style: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
+For new projects, the Google docstring style is recommended: https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html
+
+This rule is not made to be coercitive and to force you to rewrite all your code with a specific docstring standard, the most important point is to maintain consistency throughout your project. If starting a new project, the Google docstring style is recommended but not mandatory, other docstring styles can be used (ie. numpy).
 
 ### R010 - Comments
 
@@ -451,7 +462,7 @@ class MyAbstractClass(ABC):
         pass
 ```
 
-- @staticmethod: When access to the object iself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
+- @staticmethod: When access to the object itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
 ```python
 class MyClass:
     def __init__(self) -> None:
