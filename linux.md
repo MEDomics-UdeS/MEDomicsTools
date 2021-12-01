@@ -43,7 +43,7 @@ A        | 2021-12-01 | Creation    |
 
 ### R000 - Aliases
 
-Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '~/.bashrc' OR '~/.bash_aliases' files in the 'Home' directory.
+Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory.
 
 The following is a list of [Simon](https://github.com/sgiardl)'s Linux aliases:
 ```
