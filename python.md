@@ -66,8 +66,6 @@ A        | 2021-08-08 | Creation    |
 - [ ] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
 - [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
 - [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
-- [ ] Add linux section (Achille + Guillaume, alias+bashrc: Simon + Nicolas)
-- [ ] Add postgresql section (Olivier + Nicolas)
 
 ## Standard
 
