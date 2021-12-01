@@ -44,18 +44,6 @@ A        | 2021-08-08 | Creation    |
 
 ## To-Do
 
-- [x] Table of contents
-- [x] Paths
-- [x] More details on variable names (ie. equation variable), max chars of variable name
-- [x] Enums
-- [x] ABC
-- [x] What is pythonic? List comprehension, etc.
-- [x] Constants (all caps) vs Environment Variables
-- [x] Multiprocessing
-- [x] Check existing udes code standard & integrate contents
-- [x] if __name__ == '__main__'
-- [x] Encapsulation : protected vs private
-- [x] Reorder rules in a logic way
 - [ ] Class inheritance vs aggregation (Mahdi)
 - [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
 - [ ] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
