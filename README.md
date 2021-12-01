@@ -1,5 +1,7 @@
 # MEDomicsUdeS Python Coding Standard
 
+[linux](linux.md)
+
 This document presents the Python coding standard of the MEDomicsUdeS lab. It also contains cool tips, tricks and links to code efficiently in Python.
 
 ## Table of Contents
