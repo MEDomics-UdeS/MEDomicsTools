@@ -1,6 +1,6 @@
-# MEDomicsUdeS PostgreSQL Coding Standard
+# MEDomicsTools PostgreSQL Coding Standard
 
-This document presents the Python coding standard of the MEDomicsUdeS lab. It also contains cool tips, tricks and links to code efficiently in Python.
+This document presents the PostgreSQL coding standard of the MEDomicsTools team.
 
 ## Table of Contents
 - [MEDomicsUdeS PostgreSQL Coding Standard](#medomicsudes-postgresql-coding-standard)
