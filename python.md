@@ -22,11 +22,12 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     + [R010 - Comments](#r010---comments)
     + [R011 - String Quotes](#r011---string-quotes)
     + [R012 - f-strings](#r012---f-strings)
-    + [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
-    + [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
-    + [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
-    + [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
-    + [R017 - Decorators](#r017---decorators)
+    + [R013 - r-strings](#r013---r-strings)
+    + [R014 - Multiprocessing and Compilation](#r014---multiprocessing-and-compilation)
+    + [R015 - Enumerations - PEP 435](#r015---enumerations---pep-435)
+    + [R016 - Abstract Classes - PEP 3119](#r016---abstract-classes---pep-3119)
+    + [R017 - Encapsulation - Private vs Protected vs Public](#r017---encapsulation---private-vs-protected-vs-public)
+    + [R018 - Decorators](#r018---decorators)
 
 NOTES: 
 
@@ -326,7 +327,30 @@ hourly_wage = 99.91 # Hourly wage in dollars
 print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
 ```
 
-### R013 - Multiprocessing and Compilation
+### R013 - r-strings
+
+r-strings or Python raw string is a string with the prefix 'r' or 'R'. r-string treats backslach(\\) as literal character and not as an escape caracter.
+
+Example:
+
+```python
+s = "Hel\lo"
+raw_s = r"Hello"
+
+print(f's : {s}')
+
+print(f'raw_s : {raw_s}')
+```
+
+Output:
+
+```python
+Hel\lo
+Hello
+```
+To discover more about different types of string prefix refer to : https://docs.python.org/3/reference/lexical_analysis.html#literals
+
+### R014 - Multiprocessing and Compilation
 
 By default, Python uses a single CPU thread to perform calculations. In order to use the full potential of modern multithread CPU's, various multiprocessing libraries have been created. For example:
 - Built-in 'multiprocessing' library: https://docs.python.org/3/library/multiprocessing.html
@@ -338,7 +362,7 @@ Python is an interpreted language, which makes the language multi-platform but t
 It is also possible to use the GPU to perform some calculations to improve performance, for example : 
 - CUDA + Numba: https://developer.nvidia.com/how-to-cuda-python
 
-### R014 - Enumerations - PEP 435
+### R015 - Enumerations - PEP 435
 
 Enumerations allow a simple interface between human-readable string values and numerical values. For example, if you want your class to have a method with a color as an argument, you can specify all possible colors using an enumeration, each being associated to an integer value. This can improve the interactibility and optimize your classes.
 
@@ -371,7 +395,7 @@ For example, if in your code you want users to state that it's not "Green", "gre
 
 Read PEP 435: https://www.python.org/dev/peps/pep-0435/
 
-### R015 - Abstract Classes - PEP 3119
+### R016 - Abstract Classes - PEP 3119
 
 To implement an abstract class in Python, which is a signature class that cannot be instanced itself but only its child classes can be, you can use the 'abc' library (ABC : Abstract Base Class):
 
@@ -386,7 +410,7 @@ Read the standard library documentation: https://docs.python.org/3/library/abc.h
 
 Read PEP 3119: https://www.python.org/dev/peps/pep-3119/
 
-### R016 - Encapsulation - Private vs Protected vs Public
+### R017 - Encapsulation - Private vs Protected vs Public
 
 In Python, encapsulation can be implemented in classes so that some attributes or methods can be public, protected or private:
 - Public: can be accessed from inside the class, outside the class and child classes (no underscore before name)
