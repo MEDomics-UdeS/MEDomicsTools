@@ -29,6 +29,12 @@ This document presents some Linux tips and tricks to improve your Linux experien
       - [Search](#search)
     - [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
     - [R007 - SSH (Secure Shell)](#r007---ssh-secure-shell)
+    - [**Using Custom Names For Your SSH Connections**](#using-custom-names-for-your-ssh-connections)
+    - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
+    - [R009 - Using Git](#r009---using-git)
+    - [R010 - Using Anaconda](#r010---using-anaconda)
+      - [**Installing Anaconda**](#installing-anaconda)
+      - [**Installing Miniconda**](#installing-miniconda)
 
 NOTES: 
 
@@ -63,7 +69,9 @@ A        | 2021-12-02 | Update      |
 ---
 ### R000 - Aliases
 
-Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
+Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. 
+
+Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
 
 ```
 source ~/.bash_aliases
@@ -360,5 +368,93 @@ Where 'remote host' is an existing IP adress or domain that you will be connecti
 When connecting to a remote host with different username, use the syntax:
 `ssh <remote username>@<remote host>`
 
+A useful feature of `ssh` is that it can be used to do X11 forwarding. This will forward every windows you open on your remote server to your computer. To enable X11 forwarding, use the syntax: `ssh -Y <remote username>@<remote host>`. Since X11 forwarding can be slow for heavy or extended work, we recommend using [TeamViewer](https://www.teamviewer.com/en-us/download/linux/) in such use cases.
+
 You might be prompted to enter the password. Once it is done, you will see the current shell change to the remote user@remote host. To exit, simply type
 `exit`.
+
+### **Using Custom Names For Your SSH Connections**
+
+Remembering every device's IP address that you need remote access into can be troublesome. A good way to keep track of those addresses is by writing [aliases](#r000---aliases).
+
+```
+# Example of a custom alias
+
+alias alienware="ssh <username>@192.168.0.1"
+```
+
+Although this is a prefectly acceptable solution, we recommend using a separate file to store every remote hosts you might want access to.
+
+1. Create a config file inside of your '\~/.ssh' directory
+   ```
+   mkdir -p ~/.ssh && touch ~/.ssh/config
+   ```
+
+2. Adding entries to the '\~/.ssh/config' file
+   ```
+   Host <Custom Remote access name>
+      HostName <IP Adress of the remote server>
+      User <Username to access remote server>
+   ```
+   ```
+   # Example of a valid '~/.ssh/config' file
+
+   Host Alienware_GRIIS
+     HostName 10.244.54.13
+     User guillaume
+
+   Host archVM
+     HostName 42.69.42.69
+     User McLovin
+   ```
+
+You will now be able to remote access into your servers using the `ssh` command as follows:
+```
+ssh Alienware_GRIIS
+```
+
+---
+
+### R008 - SCP (Secure Copy)
+
+test test
+
+
+---
+
+### R009 - Using Git 
+
+There is a lot of ground to cover here.
+
+---
+
+### R010 - Using Anaconda
+
+Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are 2 main Anaconda products available for individual use:
+- Anaconda
+- Miniconda
+
+#### **Installing Anaconda**
+
+They both accomplish the same tasks, but the packages come in a different way. Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
+
+
+#### **Installing Miniconda**
+
+Alternatively, you can use miniconda. Miniconda only comes with essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
+
+```
+# Installing Miniconda
+
+sudo apt update && sudo apt install curl && \
+curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+cd ~ && \
+sudo chmod +x miniconda.sh && \
+bash miniconda.sh
+```
+
+After miniconda has been installed, can now safely remove the 'miniconda.sh' file.
+
+```
+rm ~/miniconda.sh
+```
