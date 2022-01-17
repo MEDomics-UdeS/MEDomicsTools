@@ -4,30 +4,31 @@ This document presents some Linux tips and tricks to improve your Linux experien
 
 ## Table of Contents
 - [MEDomicsTools Linux Tips](#medomicstools-linux-tips)
-  * [Table of Contents](#table-of-contents)
-  * [Contributors](#contributors)
-  * [Changelog](#changelog)
-  * [To-Do](#to-do)
-  * [Standard](#standard)
-    + [R000 - Aliases](#r000---aliases)
-    + [R001 - Terminal](#r001---terminal)
-      - [**Overview**](#--overview--)
-      - [**Terminal Window**](#--terminal-window--)
-      - [**Terminal Tabs**](#--terminal-tabs--)
-      - [**Terminal Display**](#--terminal-display--)
-      - [**Terminal Input**](#--terminal-input--)
-      - [**Pimping the terminal**](#--pimping-the-terminal--)
-    + [R002 - Working Directory](#r002---working-directory)
-    + [R003 - Absolute and Relative Path](#r003---absolute-and-relative-path)
-    + [R004 - Basic Commands](#r004---basic-commands)
-      - [**Directories**](#--directories--)
-      - [**Files**](#--files--)
-    + [R005 - Vim and Nano](#r005---vim-and-nano)
+  - [Table of Contents](#table-of-contents)
+  - [Contributors](#contributors)
+  - [Changelog](#changelog)
+  - [To-Do](#to-do)
+  - [## Standard](#-standard)
+    - [R000 - Aliases](#r000---aliases)
+    - [R001 - Terminal](#r001---terminal)
+      - [**Overview**](#overview)
+      - [**Terminal Window**](#terminal-window)
+      - [**Terminal Tabs**](#terminal-tabs)
+      - [**Terminal Display**](#terminal-display)
+      - [**Terminal Input**](#terminal-input)
+  - [**Using a Customized Terminal Prompt**](#using-a-customized-terminal-prompt)
+    - [**Steps to install the prompt:**](#steps-to-install-the-prompt)
+    - [R002 - Working Directory](#r002---working-directory)
+    - [R003 - Absolute and Relative Path](#r003---absolute-and-relative-path)
+    - [R004 - Basic Commands](#r004---basic-commands)
+      - [**Directories**](#directories)
+      - [**Files**](#files)
+    - [R005 - Vim and Nano](#r005---vim-and-nano)
       - [Modes for Vim](#modes-for-vim)
       - [Exit and save](#exit-and-save)
       - [Search](#search)
-    + [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
-    + [R007 - SSH (Secure Shell)](#r007---ssh--secure-shell-)
+    - [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
+    - [R007 - SSH (Secure Shell)](#r007---ssh-secure-shell)
 
 NOTES: 
 
@@ -62,7 +63,11 @@ A        | 2021-12-02 | Update      |
 ---
 ### R000 - Aliases
 
-Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory.
+Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
+
+```
+source ~/.bash_aliases
+```
 
 The following is a list of [Simon](https://github.com/sgiardl)'s Linux aliases:
 ```
@@ -123,9 +128,38 @@ Shell, Prompt, Terminal or Console are all various names to describe the text in
 - **Shift+Ctrl+C**: copy highligthed text.
 - **Shift+Ctrl+V**: paste from clipboard at the cursor position.
 
-#### **Pimping the terminal**
+## **Using a Customized Terminal Prompt**
 
-Much like aliases, it is possible to modify the user's '~/.bashrc' file to customize the terminal. The *how* is hard to explain briefly thus we recommend consulting this [guide](https://www.fosslinux.com/21753/how-to-customize-your-ubuntu-terminal-prompt.htm).
+We recommend you install the [Starship Prompt](https://starship.rs/) to better use the terminal. It's a cross platform shell that has a lot of features, notably:
+- Displaying the active Anaconda environment
+- Showing which languages are used for the scripts in your current directory
+- Letting you know which git branch you are currently working on, and if modifications are present
+- And lots more...
+  
+### **Steps to install the prompt:**
+1. You need to install a Nerd Font. We recommend the Hack Nerd Font Complete.
+    ```
+    sudo apt update && sudo apt install fonts-hack
+    ```
+
+2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the \
+Hack Nerd Font Complete as your default font.
+   
+3. Downloading the starship prompt.
+   ```
+   sudo apt install curl && sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+   ```
+
+4. Adding this line at the end of your '\~/.bashrc' file
+   ```
+   eval "$(starship init bash)"
+   ```
+
+5. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
+   ```
+   sh -c "cd ~/.config && $(curl https://github.com/sgiardl/MEDomicsTools/custom_files/starship.toml)"
+   ```
+
 
 ---
 ### R002 - Working Directory
