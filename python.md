@@ -4,29 +4,29 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
 
 ## Table of Contents
 - [MEDomicsTools Python Coding Standard](#medomicstools-python-coding-standard)
-  * [Table of Contents](#table-of-contents)
-  * [Changelog](#changelog)
-  * [Contributors](#contributors)
-  * [To-Do](#to-do)
-  * [Standard](#standard)
-    + [R000 - Recommended Software](#r000---recommended-software)
-    + [R001 - Universite de Sherbrooke Computer Science Department Programming Standard](#r001---universite-de-sherbrooke-computer-science-department-programming-standard)
-    + [R002 - Project Repository Structure](#r002---project-repository-structure)
-    + [R003 - Pythonic - The Zen of Python - PEP 20](#r003---pythonic---the-zen-of-python---pep-20)
-    + [R004 - Main](#r004---main)
-    + [R005 - Paths - Working Directory](#r005---paths---working-directory)
-    + [R006 - Style - PEP 8](#r006---style---pep-8)
-    + [R007 - Naming Variables - Functions - Classes](#r007---naming-variables---functions---classes)
-    + [R008 - Type Hinting - PEP 484](#r008---type-hinting---pep-484)
-    + [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
-    + [R010 - Comments](#r010---comments)
-    + [R011 - String Quotes](#r011---string-quotes)
-    + [R012 - f-strings](#r012---f-strings)
-    + [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
-    + [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
-    + [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
-    + [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
-    + [R017 - Decorators](#r017---decorators)
+  - [Table of Contents](#table-of-contents)
+  - [Contributors](#contributors)
+  - [Changelog](#changelog)
+  - [To-Do](#to-do)
+  - [Standard](#standard)
+    - [R000 - Recommended Software](#r000---recommended-software)
+    - [R001 - Universite de Sherbrooke Computer Science Department Programming Standard](#r001---universite-de-sherbrooke-computer-science-department-programming-standard)
+    - [R002 - Project Repository Structure](#r002---project-repository-structure)
+    - [R003 - Pythonic - The Zen of Python - PEP 20](#r003---pythonic---the-zen-of-python---pep-20)
+    - [R004 - Main](#r004---main)
+    - [R005 - Paths - Working Directory](#r005---paths---working-directory)
+    - [R006 - Style - PEP 8](#r006---style---pep-8)
+    - [R007 - Naming Variables - Functions - Classes](#r007---naming-variables---functions---classes)
+    - [R008 - Type Hinting - PEP 484](#r008---type-hinting---pep-484)
+    - [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
+    - [R010 - Comments](#r010---comments)
+    - [R011 - String Quotes](#r011---string-quotes)
+    - [R012 - f-strings](#r012---f-strings)
+    - [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
+    - [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
+    - [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
+    - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
+    - [R017 - Decorators](#r017---decorators)
 
 NOTES: 
 
@@ -78,7 +78,7 @@ Operating System:
 - Arch Linux: https://archlinux.org/ (if you like to live dangerously)
 
 Package Suite & Environment Manager:
-- Anaconda: https://www.anaconda.com/products/individual
+- Anaconda: https://github.com/sgiardl/MEDomicsTools/blob/main/linux.md#using-anaconda
 
 IDE:
 - PyCharm Professional (free for students): https://www.jetbrains.com/shop/eform/students
