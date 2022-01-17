@@ -29,12 +29,13 @@ This document presents some Linux tips and tricks to improve your Linux experien
       - [Search](#search)
     - [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
     - [R007 - SSH (Secure Shell)](#r007---ssh-secure-shell)
-    - [**Using Custom Names For Your SSH Connections**](#using-custom-names-for-your-ssh-connections)
+    - [**Using Custom Host Names For Your SSH Connections**](#using-custom-host-names-for-your-ssh-connections)
     - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
     - [R009 - Using Git](#r009---using-git)
     - [R010 - Using Anaconda](#r010---using-anaconda)
       - [**Installing Anaconda**](#installing-anaconda)
       - [**Installing Miniconda**](#installing-miniconda)
+      - [**Creating a Conda Environment**](#creating-a-conda-environment)
 
 NOTES: 
 
@@ -373,7 +374,7 @@ A useful feature of `ssh` is that it can be used to do X11 forwarding. This will
 You might be prompted to enter the password. Once it is done, you will see the current shell change to the remote user@remote host. To exit, simply type
 `exit`.
 
-### **Using Custom Names For Your SSH Connections**
+### **Using Custom Host Names For Your SSH Connections**
 
 Remembering every device's IP address that you need remote access into can be troublesome. A good way to keep track of those addresses is by writing [aliases](#r000---aliases).
 
@@ -417,8 +418,24 @@ ssh Alienware_GRIIS
 
 ### R008 - SCP (Secure Copy)
 
-test test
+The `scp` command can be used to copy files to a remote server securely using ssh. The command uses this syntax: 
+```
+scp <file 1> <file 2> <file 3> ... <remote username>@<remote server>:<remote path>
+```
 
+Here is a real world example of how to use the `scp` command. We will assume that you have set up custom ssh host names as suggested [here](#using-custom-host-names-for-your-ssh-connections).
+
+```
+scp cute_cat.png feral_cat.png purrfect_cat.png Alienware_GRIIS:/home/guillaume/Cats/
+```
+
+You can also copy an entire directory recursively using the `-r` flag:
+
+```
+scp -r my_cats/ Alienware_GRIIS:/home/guillaume/
+```
+
+This will result in the copy of the `my_cats` directory on the remote server at `/home/guillaume/my_cats/`
 
 ---
 
@@ -457,4 +474,48 @@ After miniconda has been installed, can now safely remove the 'miniconda.sh' fil
 
 ```
 rm ~/miniconda.sh
+```
+
+#### **Creating a Conda Environment**
+
+Conda environment makes managing dependencies easier over multiple projects. It ensures that the version of a package you need in a project will not be affected by another project on your computer that needs a different version of the same package. To create a Conda environment, use the following command:
+
+```
+conda create -n <Environment name> python=<python version>
+```
+
+```
+# Example of a Conda environment
+
+conda create -n MEDomicsTools python=3.8
+```
+
+To use your newly created environment, you use the following command:
+
+```
+conda active MEDomicsTools
+```
+
+Once in your environment, you can install the packages you need with either the `conda` package manager or `pip`.
+
+```
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+```
+
+To quit a conda environment, you can use the following command:
+
+```
+conda deactivate
+```
+
+To completely remove a conda environment, you can use this command:
+
+```
+conda env remove -n ENV_NAME
+```
+
+By default, Anaconda will display in your terminal prompt which conda environment you are currently using. If you are using the recommended [Starship Prompt](#using-a-customized-terminal-prompt), this behavior can be redundant. You can disable Anaconda from showing you the current environment by typing this command:
+
+```
+conda config --set changeps1 False
 ```
