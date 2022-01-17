@@ -142,8 +142,7 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
     sudo apt update && sudo apt install fonts-hack
     ```
 
-2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the \
-Hack Nerd Font Complete as your default font.
+2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the Hack Nerd Font Complete as your default font.
    
 3. Downloading the starship prompt.
    ```
