@@ -29,6 +29,13 @@ This document presents some Linux tips and tricks to improve your Linux experien
       - [Search](#search)
     - [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
     - [R007 - SSH (Secure Shell)](#r007---ssh-secure-shell)
+    - [**Using Custom Host Names For Your SSH Connections**](#using-custom-host-names-for-your-ssh-connections)
+    - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
+    - [R009 - Using Git](#r009---using-git)
+    - [R010 - Using Anaconda](#r010---using-anaconda)
+      - [**Installing Anaconda**](#installing-anaconda)
+      - [**Installing Miniconda**](#installing-miniconda)
+      - [**Creating a Conda Environment**](#creating-a-conda-environment)
 
 NOTES: 
 
@@ -63,7 +70,9 @@ A        | 2021-12-02 | Update      |
 ---
 ### R000 - Aliases
 
-Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
+Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. 
+
+Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
 
 ```
 source ~/.bash_aliases
@@ -142,8 +151,7 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
     sudo apt update && sudo apt install fonts-hack
     ```
 
-2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the \
-Hack Nerd Font Complete as your default font.
+2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the Hack Nerd Font Complete as your default font.
    
 3. Downloading the starship prompt.
    ```
@@ -157,7 +165,7 @@ Hack Nerd Font Complete as your default font.
 
 5. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
    ```
-   sh -c "cd ~/.config && curl -o starship.toml https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/custom_files/starship.toml"
+   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/custom_files/starship.toml"
    ```
 
 
@@ -361,5 +369,153 @@ Where 'remote host' is an existing IP adress or domain that you will be connecti
 When connecting to a remote host with different username, use the syntax:
 `ssh <remote username>@<remote host>`
 
+A useful feature of `ssh` is that it can be used to do X11 forwarding. This will forward every windows you open on your remote server to your computer. To enable X11 forwarding, use the syntax: `ssh -Y <remote username>@<remote host>`. Since X11 forwarding can be slow for heavy or extended work, we recommend using [TeamViewer](https://www.teamviewer.com/en-us/download/linux/) in such use cases.
+
 You might be prompted to enter the password. Once it is done, you will see the current shell change to the remote user@remote host. To exit, simply type
 `exit`.
+
+### **Using Custom Host Names For Your SSH Connections**
+
+Remembering every device's IP address that you need remote access into can be troublesome. A good way to keep track of those addresses is by writing [aliases](#r000---aliases).
+
+```
+# Example of a custom alias
+
+alias alienware="ssh <username>@192.168.0.1"
+```
+
+Although this is a prefectly acceptable solution, we recommend using a separate file to store every remote hosts you might want access to.
+
+1. Create a config file inside of your '\~/.ssh' directory
+   ```
+   mkdir -p ~/.ssh && touch ~/.ssh/config
+   ```
+
+2. Adding entries to the '\~/.ssh/config' file
+   ```
+   Host <Custom Remote access name>
+      HostName <IP Adress of the remote server>
+      User <Username to access remote server>
+   ```
+   ```
+   # Example of a valid '~/.ssh/config' file
+
+   Host Alienware_GRIIS
+     HostName 10.244.54.13
+     User guillaume
+
+   Host archVM
+     HostName 42.69.42.69
+     User McLovin
+   ```
+
+You will now be able to remote access into your servers using the `ssh` command as follows:
+```
+ssh Alienware_GRIIS
+```
+
+---
+
+### R008 - SCP (Secure Copy)
+
+The `scp` command can be used to copy files to a remote server securely using ssh. The command uses this syntax: 
+```
+scp <file 1> <file 2> <file 3> ... <remote username>@<remote server>:<remote path>
+```
+
+Here is a real world example of how to use the `scp` command. We will assume that you have set up custom ssh host names as suggested [here](#using-custom-host-names-for-your-ssh-connections).
+
+```
+scp cute_cat.png feral_cat.png purrfect_cat.png Alienware_GRIIS:/home/guillaume/Cats/
+```
+
+You can also copy an entire directory recursively using the `-r` flag:
+
+```
+scp -r my_cats/ Alienware_GRIIS:/home/guillaume/
+```
+
+This will result in the copy of the `my_cats` directory on the remote server at `/home/guillaume/my_cats/`
+
+---
+
+### R009 - Using Git 
+
+There is a lot of ground to cover here.
+
+---
+
+### R010 - Using Anaconda
+
+Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are 2 main Anaconda products available for individual use:
+- Anaconda
+- Miniconda
+
+#### **Installing Anaconda**
+
+They both accomplish the same tasks, but the packages come in a different way. Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
+
+
+#### **Installing Miniconda**
+
+Alternatively, you can use miniconda. Miniconda only comes with essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
+
+```
+# Installing Miniconda
+
+sudo apt update && sudo apt install curl && \
+curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+cd ~ && \
+sudo chmod +x miniconda.sh && \
+bash miniconda.sh
+```
+
+After miniconda has been installed, can now safely remove the 'miniconda.sh' file.
+
+```
+rm ~/miniconda.sh
+```
+
+#### **Creating a Conda Environment**
+
+Conda environment makes managing dependencies easier over multiple projects. It ensures that the version of a package you need in a project will not be affected by another project on your computer that needs a different version of the same package. To create a Conda environment, use the following command:
+
+```
+conda create -n <Environment name> python=<python version>
+```
+
+```
+# Example of a Conda environment
+
+conda create -n MEDomicsTools python=3.8
+```
+
+To use your newly created environment, you use the following command:
+
+```
+conda active MEDomicsTools
+```
+
+Once in your environment, you can install the packages you need with either the `conda` package manager or `pip`.
+
+```
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+```
+
+To quit a conda environment, you can use the following command:
+
+```
+conda deactivate
+```
+
+To completely remove a conda environment, you can use this command:
+
+```
+conda env remove -n ENV_NAME
+```
+
+By default, Anaconda will display in your terminal prompt which conda environment you are currently using. If you are using the recommended [Starship Prompt](#using-a-customized-terminal-prompt), this behavior can be redundant. You can disable Anaconda from showing you the current environment by typing this command:
+
+```
+conda config --set changeps1 False
+```
