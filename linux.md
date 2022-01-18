@@ -153,17 +153,14 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
 
 2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the Hack Nerd Font Complete as your default font.
    
-3. Downloading the starship prompt.
+3. Downloading the starship prompt. (Commands for bash prompt only)
    ```
-   sudo apt install curl && sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-   ```
-
-4. Adding this line at the end of your '\~/.bashrc' file
-   ```
-   eval "$(starship init bash)"
+   sudo apt install curl && \
+   sh -c "$(curl -fsSL https://starship.rs/install.sh)" && \
+   echo 'eval "$(starship init bash)"' >> ~/.bashrc
    ```
 
-5. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
+4. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
    ```
    sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/custom_files/starship.toml"
    ```
