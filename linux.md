@@ -157,7 +157,7 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
    ```
    sudo apt install curl && \
    sh -c "$(curl -fsSL https://starship.rs/install.sh)" && \
-   echo 'eval "$(starship init bash)"' >> ~/.bashrc
+   echo '\n# Starting the starship prompt\neval "$(starship init bash)"' >> ~/.bashrc
    ```
 
 4. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
