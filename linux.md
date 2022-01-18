@@ -62,7 +62,7 @@ A        | 2021-12-02 | Update      |
 - [x] vim/nano (Achille)
 - [x] Save terminal output to disk (Achille)
 - [x] ssh (Achille)
-- [ ] scp (Nicolas)
+- [x] scp (Nicolas)
 - [ ] git (Achille)
 - [ ] alias + bashrc (Nicolas: add stuff to Simon's part)
 
@@ -453,12 +453,12 @@ Anaconda is the world’s most popular Python distribution platform. It is used 
 
 #### **Installing Anaconda**
 
-They both accomplish the same tasks, but the packages come in a different way. Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
+Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
 
 
 #### **Installing Miniconda**
 
-Alternatively, you can use miniconda. Miniconda only comes with essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
+Alternatively, you can use miniconda. Miniconda only comes with the essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
 
 ```
 # Installing Miniconda
@@ -466,7 +466,7 @@ Alternatively, you can use miniconda. Miniconda only comes with essential packag
 sudo apt update && sudo apt install curl && \
 curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
 cd ~ && \
-sudo chmod +x miniconda.sh && \
+chmod +x miniconda.sh && \
 bash miniconda.sh
 ```
 
@@ -511,7 +511,7 @@ conda deactivate
 To completely remove a conda environment, you can use this command:
 
 ```
-conda env remove -n ENV_NAME
+conda env remove -n <Environment name>
 ```
 
 By default, Anaconda will display in your terminal prompt which conda environment you are currently using. If you are using the recommended [Starship Prompt](#using-a-customized-terminal-prompt), this behavior can be redundant. You can disable Anaconda from showing you the current environment by typing this command:
