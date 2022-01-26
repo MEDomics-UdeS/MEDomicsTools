@@ -55,7 +55,7 @@ A        | 2021-08-08 | Creation    |
 ## To-Do
 
 - [ ] Class inheritance vs aggregation (Mahdi)
-- [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
+- [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
 - [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
 - [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
@@ -462,7 +462,7 @@ class MyAbstractClass(ABC):
         pass
 ```
 
-- @staticmethod: When access to the object itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
+- @staticmethod: When the access to the instance of a class itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
 ```python
 class MyClass:
     def __init__(self) -> None:
@@ -475,12 +475,18 @@ class MyClass:
     def calculate_new_area(x: float, y: float) -> float:
         return x * y
 ```
+- @classmethod: When the access to the instance of a class is unneeded but the access to the class itself is needed, adding this decorator will force the need of 'cls' as the first argument.
+An example of usage could be to provide a class with a different constructor.
+```python
+class Square:
+    def __init__(self, side_length_in_cm: float) -> None:
+        self.length = side_length_in_cm
+    
+    @classmethod
+    def from_decimeter(cls, side_length_in_dm: float):
+        return cls(side_length_in_cm=side_length_in_dm*10)
+```
 
-- @classmethod
-
-To Do
-
-- @property
 
 To Do (already in other rule pertaining to encapsulation & private attributes)
 
