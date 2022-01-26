@@ -230,7 +230,7 @@ To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checke
 - Adopt "snake_case" OR "camelCase" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
 - For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
-- For functions and methods, enumerate the arguments (following 'self' if it's a method) by adding a new line between each of them
+- For functions and methods, enumerate the arguments (following 'self' if it's a method) by adding a new line between each of them.
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 - Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
