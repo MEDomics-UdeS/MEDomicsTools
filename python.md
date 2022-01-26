@@ -56,7 +56,7 @@ A        | 2021-08-08 | Creation    |
 
 - [ ] Class inheritance vs aggregation (Mahdi)
 - [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
-- [ ] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
+- [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
 - [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
