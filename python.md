@@ -55,8 +55,8 @@ A        | 2021-08-08 | Creation    |
 ## To-Do
 
 - [ ] Class inheritance vs aggregation (Mahdi)
-- [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
-- [ ] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
+- [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
+- [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
 - [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
@@ -230,6 +230,7 @@ To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checke
 - Adopt "snake_case" OR "camelCase" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
 - For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
+- For functions and methods, enumerate the arguments (following 'self' if it's a method) by adding a new line between each of them.
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 - Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
@@ -261,7 +262,10 @@ NUM_WORKERS = 24
 IMAGE_EXT = 'jpg'
 
 # Equations
-def calculate_y(m: float, x: float, b: float) -> float:
+def calculate_y(m: float,
+                x: float,
+                b: float) -> float:
+  
     return m * x + b
 ```
 
@@ -458,7 +462,7 @@ class MyAbstractClass(ABC):
         pass
 ```
 
-- @staticmethod: When access to the object itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
+- @staticmethod: When the access to the instance of a class itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
 ```python
 class MyClass:
     def __init__(self) -> None:
@@ -471,12 +475,18 @@ class MyClass:
     def calculate_new_area(x: float, y: float) -> float:
         return x * y
 ```
+- @classmethod: When the access to the instance of a class is unneeded but the access to the class itself is needed, adding this decorator will force the need of 'cls' as the first argument.
+An example of usage could be to provide a class with a different constructor.
+```python
+class Square:
+    def __init__(self, side_length_in_cm: float) -> None:
+        self.length = side_length_in_cm
+    
+    @classmethod
+    def from_decimeter(cls, side_length_in_dm: float):
+        return cls(side_length_in_cm=side_length_in_dm*10)
+```
 
-- @classmethod
-
-To Do
-
-- @property
 
 To Do (already in other rule pertaining to encapsulation & private attributes)
 
