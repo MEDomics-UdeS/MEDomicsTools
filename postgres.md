@@ -26,6 +26,7 @@ NOTES:
 
 Revision | Date       | Description |
 ---------| -----------| ----------- |
+B        | 2022-01-27 | Python      |
 A        | 2021-11-18 | Creation    |
 
 ## Contributors
@@ -40,7 +41,7 @@ A        | 2021-11-18 | Creation    |
 - [X] User creation and modification
 - [ ] PostgreSQL section : queries et autres
 - [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160)
-- [ ] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
+- [X] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
 - [ ] MIMIC: Add concepts tabs creation : Oli
 - [ ] MIMIC and eICU: add table description : Oli
 - [ ] Add table creation (And file to create the sapsii-24h tab) : Oli
@@ -215,4 +216,73 @@ To create the eICU database, follow these next steps:
 ## PostgreSQL
 
 ## Python
+### R005 - Interaction with PostgreSQL using psycopg2 and pandas
+- The psycopg2 library enables to create a *connection* object that handles communication with a PostgreSQL database.
+- From the psycopg2 doc: "*the connections are thread safe and can be shared among many threads.*".
+- The next code snippet is an example of a function that creates a *connection*:
+````python
+import psycopg2
 
+def create_cursor(user: str,
+                  password: str,
+                  database: str,
+                  host: str,
+                  port: str):
+  """
+  Creates a connection to a database
+  
+  Args:
+      user: username to access the database
+      password: password linked to the user
+      database: name of the database
+      host: database host address
+      port: connection port number
+      
+  Returns: connection
+  """
+  try:
+    conn = psycopg2.connect(database=database,
+                            user=user,
+                            host=host,
+                            password=password,
+                            port=port)
+
+  except psycopg2.Error as e:
+    raise Exception(e.pgerror)
+
+  return conn
+````
+- From a *connection*, you can create a *cursor* object that is provided with methods to send queries to the database and extract data.
+- From the psycopg2 documentation: "*the cursors are not thread safe. A multithread application can create many cursors from the same connection and should use each cursor from a single thread.*".
+- Using *cursors* as context managers ensure that they will be closed when the context is left:
+````python
+with conn.cursor() as curs:
+    curs.execute('SELECT * FROM public."MY_TABLE"')
+    
+# the cursor is now closed
+````
+- In order to handle data after its extraction, it is recommended to store it in a pandas 'Dataframe' object.
+- The next example shows how to extract the table *MY_TABLE* from the *public* schema of a database using the function defined above:
+````python
+import pandas as pd
+
+conn = create_cursor(user='username',
+                     password='mypassword',
+                     database='mydatabase',
+                     host='localhost',
+                     port='5432')
+
+with conn.cursor() as curs:
+
+    # We execute the query
+    curs.execute('SELECT * FROM public."MY_TABLE"')
+
+    # We retrieve the column names and the data
+    columns = [desc[0] for desc in curs.description]
+    data = curs.fetchall()
+
+    # We create a pandas dataframe
+    df = pd.DataFrame(data=data,
+                      columns=columns)
+    
+````
