@@ -27,6 +27,7 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
     - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
     - [R017 - Decorators](#r017---decorators)
+    - [R018 - Project Requirements](#r018---project-requirements)
 
 NOTES: 
 
@@ -47,6 +48,7 @@ NOTES:
 
 Revision | Date       | Description |
 ---------| -----------| ----------- |
+E        | 2022-02-10 | Added 'pipreqs' details    |
 D        | 2021-12-01 | Updated based on team's comments    |
 C        | 2021-10-04 | Added new items in to-do list    |
 B        | 2021-09-13 | Updated based on team's comments    |
@@ -57,7 +59,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Class inheritance vs aggregation (Mahdi)
 - [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
 - [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
-- [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
+- [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
@@ -139,7 +141,7 @@ for i in range(len(my_list)):
     sum = sum + my_list[i]
     
 # Good Pythonic Vectorized Way
-my_sum = sum(my_list)
+my_sum = sum(my_list)### R018 - Project Requirements
 ```
 - Use List Comprehension as much as possible. For example, to filter out a list:
 ```python
@@ -487,7 +489,27 @@ class Square:
         return cls(side_length_in_cm=side_length_in_dm*10)
 ```
 
-
-To Do (already in other rule pertaining to encapsulation & private attributes)
-
 - @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
+
+### R018 - Project Requirements
+
+In the root folder of your repository, add a 'requirements.txt' file containing a list of all Python packages and versions used in your project. 
+
+The following terminal command is **NOT** recommended, since it will generate a list of ALL packages in your actual environment, not only the ones that are used in the project:
+```
+# DO NOT USE THIS
+pip freeze > requirements.txt
+```
+
+The 'pipreqs' package is recommended instead. It will only list the packages and versions that are imported in the project files. First, install the 'pipreqs' package:
+
+```
+# USE THIS
+pip install pipreqs
+```
+
+Then, simply run the following command in the root folder of your project:
+```
+# USE THIS
+pipreqs --force
+```
