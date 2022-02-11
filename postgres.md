@@ -37,16 +37,16 @@ A        | 2021-11-18 | Creation    |
 
 - [X] Table of contents
 - [X] Server creation
-- [ ] Database creation : ajout d'un exemple jouet
+- [ ] Database creation : ajout d'un exemple jouet : Guillaume
 - [X] User creation and modification
-- [ ] PostgreSQL section : queries et autres
+- [ ] PostgreSQL section : queries et autres à partir du même exemple jouet : Guillaume
 - [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160)
 - [X] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
 - [ ] MIMIC: Add concepts tabs creation : Oli
 - [ ] MIMIC and eICU: add table description : Oli
 - [ ] Add table creation (And file to create the sapsii-24h tab) : Oli
-- [ ] Linux user creation?  Peut-être juste en faire mention
 - [ ] Faire une database jouet avec user jouet pour pratiquer les opérations : Nic?
+- [ ] Transférer PGadmin à DataGrip: Oli
 
 ## PgAdmin
 ### R000 - Recommended Software
