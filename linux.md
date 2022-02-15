@@ -32,10 +32,16 @@ This document presents some Linux tips and tricks to improve your Linux experien
     - [**Using Custom Host Names For Your SSH Connections**](#using-custom-host-names-for-your-ssh-connections)
     - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
     - [R009 - Using Git](#r009---using-git)
+      - [**Getting Started**](#getting-started)
     - [R010 - Using Anaconda](#r010---using-anaconda)
       - [**Installing Anaconda**](#installing-anaconda)
       - [**Installing Miniconda**](#installing-miniconda)
       - [**Creating a Conda Environment**](#creating-a-conda-environment)
+    - [R011 - Recommended Terminal Emulator](#r011---recommended-terminal-emulator)
+      - [**Installing Kitty**](#installing-kitty)
+      - [**Using Kittens**](#using-kittens)
+      - [**Terminal Issues with SSH and kitty**](#terminal-issues-with-ssh-and-kitty)
+    - [R012 - Using Tmux and Alternatives](#r012---using-tmux-and-alternatives)
 
 NOTES: 
 
@@ -54,6 +60,7 @@ Revision | Date       | Description |
 ---------| -----------| ----------- |
 A        | 2021-12-01 | Creation    |
 A        | 2021-12-02 | Update      |
+G        | 2022-02-15 | Update      |
 
 ## To-Do
 
@@ -63,7 +70,9 @@ A        | 2021-12-02 | Update      |
 - [x] Save terminal output to disk (Achille)
 - [x] ssh (Achille)
 - [x] scp (Nicolas)
-- [ ] git (Achille)
+- [ ] git (Started but not finished)
+- [ ] Tmux
+- [x] Kitty
 - [ ] alias + bashrc (Nicolas: add stuff to Simon's part)
 
 ## Standard
@@ -438,7 +447,21 @@ This will result in the copy of the `my_cats` directory on the remote server at 
 
 ### R009 - Using Git 
 
-There is a lot of ground to cover here.
+Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contribution between said project.
+
+Git should either be installed by default or your system, otherwise you can install `git` using the git package:
+```
+sudo apt update && sudo apt install git
+```
+
+#### **Getting Started**
+In order to use Git you need to set at least a name and email:
+
+```
+git config --global user.name  "Marcel Carre"
+git config --global user.email "Marcel.m_harcele@example.com"
+```
+See [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) for more information.
 
 ---
 
@@ -515,4 +538,50 @@ By default, Anaconda will display in your terminal prompt which conda environmen
 
 ```
 conda config --set changeps1 False
+```
+
+### R011 - Recommended Terminal Emulator
+
+We recommend using [Kitty](https://sw.kovidgoyal.net/kitty/) as a terminal emulator. This terminal has a lot of useful features such as:
+- Offloading the rendering to the GPU for lower system loads
+- Offers minimal latency compared to other terminal emulators
+- Supports font ligatures and emoji
+- Supports hyperlinks
+- Supports Graphicsm with images and animations inside the terminal session
+- Highly configurable within it's config file
+
+#### **Installing Kitty**
+
+To install kitty, simply run the following command:
+```
+sudo apt update && sudo apt install kitty
+```
+To configure Kitty, a config file should be located at `$HOME/.config/kitty/kitty.conf`. If no config file is present after install, you can copy the existing default one using this command:
+```
+cp /usr/share/doc/kitty ~/.config/
+```
+The official documentation for kitty can be acessed [here](https://sw.kovidgoyal.net/kitty/conf/).
+
+#### **Using Kittens**
+
+Kitty has a framework for easily creating terminal programs that make use of its advanced features. These programs are called kittens. Kittens are submodules written in python to extend the functionality of kitty. They can also be used both to create useful standalone programs. Here are some of the most used ones:
+```
+kitty +kitten icat image.jpeg             # show image in the terminal (needs imagemagick)
+kitty +kitten diff file1 file2            # show diff of two files
+kitty +kitten clipboard                   # this kitten allows working with clipboard even over ssh
+```
+The official documentation for kittens can be found [here](https://sw.kovidgoyal.net/kitty/kittens_intro/#kittens).
+
+#### **Terminal Issues with SSH and kitty**
+When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
+```
+kitty +kitten ssh user@host
+```
+You may want to set it as an alias for ssh. Alternatively, if you are still having issues, you can manually change your `$TERM` env variable to something like `xterm_256color`, but this might reduce some of the useful features of kitty.
+
+### R012 - Using Tmux and Alternatives
+
+Running a command detached from the shell session and piping the output to a file.
+```
+python main.py --options >> output.txt &
 ```
