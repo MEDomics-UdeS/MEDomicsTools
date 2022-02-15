@@ -162,7 +162,7 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
 
 4. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
    ```
-   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/custom_files/starship.toml"
+   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/Configs/starship.toml"
    ```
 
 
