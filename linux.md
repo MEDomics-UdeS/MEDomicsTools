@@ -33,6 +33,14 @@ This document presents some Linux tips and tricks to improve your Linux experien
     - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
     - [R009 - Using Git](#r009---using-git)
       - [**Getting Started**](#getting-started)
+      - [**Generating a SSH Key for GitHub**](#generating-a-ssh-key-for-github)
+      - [**A Few Useful Commands**](#a-few-useful-commands)
+      - [*Getting a Git repository*](#getting-a-git-repository)
+      - [*Recording changes*](#recording-changes)
+      - [*Committing changes*](#committing-changes)
+      - [*Undoing things*](#undoing-things)
+      - [*Using branches*](#using-branches)
+      - [*Syncing changes with the remote*](#syncing-changes-with-the-remote)
     - [R010 - Using Anaconda](#r010---using-anaconda)
       - [**Installing Anaconda**](#installing-anaconda)
       - [**Installing Miniconda**](#installing-miniconda)
@@ -61,6 +69,7 @@ Revision | Date       | Description |
 A        | 2021-12-01 | Creation    |
 A        | 2021-12-02 | Update      |
 G        | 2022-02-15 | Update      |
+G        | 2022-02-15 | Git section |
 
 ## To-Do
 
@@ -70,7 +79,7 @@ G        | 2022-02-15 | Update      |
 - [x] Save terminal output to disk (Achille)
 - [x] ssh (Achille)
 - [x] scp (Nicolas)
-- [ ] git (Started but not finished)
+- [x] git 
 - [ ] Tmux
 - [x] Kitty
 - [ ] alias + bashrc (Nicolas: add stuff to Simon's part)
@@ -445,7 +454,8 @@ This will result in the copy of the `my_cats` directory on the remote server at 
 
 ---
 
-### R009 - Using Git 
+### R009 - Using Git
+Most of the documentation found here is from the [ArchWiki](https://wiki.archlinux.org/title/Git). You are invited to check the link if you need further details.
 
 Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contribution between said project.
 
@@ -463,11 +473,140 @@ git config --global user.email "Marcel.m_harcele@example.com"
 ```
 See [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) for more information.
 
+#### **Generating a SSH Key for GitHub**
+
+We recommend the use of a SSH key to interact with your GitHub account. This is a secure way to access your online github account. Instead of simply entering your login information into a non-secured git config file in your computer, we use the ssh-keygen utility and link our newly generated key to the ssh-agent. The steps to generate a SSH key and link it to your GitHub account can be found [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+#### **A Few Useful Commands**
+
+Here we list a few of the most used commands for git. To dig deeper, you can have a look at the official documentaition [here](https://git-scm.com/doc).
+
+#### *Getting a Git repository*
+
+How to initialize a repository, `see git-init(1)`:
+```
+git init
+```
+
+How to clone an existing repository, `see git-clone(1)`:
+```
+git clone <repository_url>
+```
+
+#### *Recording changes*
+
+Git projects have a staging area, which is an index file in your Git directory, that stores the changes that will go into your next commit. To record a modified file you therefore firstly need to add it to the index (stage it). The git commit command then stores the current index in a new commit.
+
+How to add working tree changes to the index, `see git-add(1)`:
+```
+git add <file>
+```
+
+How to remove changes from the index, `see git-reset(1)`:
+```
+git reset <options>
+```
+
+How to show changes to be committed, unstaged changes and untracked files, `git-status(1)`:
+```
+git status
+```
+
+You can tell Git to ignore certain untracked files using .gitignore files, `see gitignore(5)`.
+
+#### *Committing changes*
+
+The `git commit` command records the staged changes to the repository, `see git-commit(1)`.
+- -m – supply the commit message as an argument, instead of composing it in your default text editor
+```
+git commit -m "MESSAGE"
+```
+
+- -a – automatically stage files that have been modified or deleted (does not add untracked files)
+```
+git commit -a
+```
+
+- --amend – redo the last commit, amending the commit message or the committed files
+```
+git commit --amend
+```
+**Tip: Always commit small changes frequently and with meaningful messages.**
+
+#### *Undoing things*
+
+These commands are used to undo changes in your repository.
+Restore working tree files, `see git-checkout(1)`:
+```
+git checkout
+```
+
+Reset current HEAD to the specified state, `see git-reset(1)`:
+```
+git reset
+```
+
+Revert some existing commits, `see git-revert(1)`:
+```
+git revert
+```
+
+#### *Using branches*
+
+Fixes and new features are usually tested in branches. When changes are satisfactory they can merged back into the default (master) branch.
+
+Create a branch, whose name accurately reflects its purpose:
+```
+git branch <branch_name>
+```
+
+List branches:
+```
+git branch
+```
+
+Switch branches:
+```
+git checkout <branch_name>
+```
+
+Create and switch:
+```
+git checkout -b <branch_name>
+```
+
+When done with a branch, delete it with:
+```
+git branch -d <branch_name>
+```
+
+#### *Syncing changes with the remote*
+
+Using git allows us to keep our files up to date across the different branches of our repositories.
+
+To update your local branch with the remote:
+```
+git pull
+```
+
+To merge your local commits with the remote and apply your changes:
+```
+git push location branch
+```
+
+When git clone is performed, it records the original location and gives it a remote name of origin.
+So what typically is done is this:
+```
+git push origin master
+```
+
+If the -u (--set-upstream) option is used, the location is recorded so the next time just a git push is necessary.
+
 ---
 
 ### R010 - Using Anaconda
 
-Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are 2 main Anaconda products available for individual use:
+Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are two main Anaconda products available for individual use:
 - Anaconda
 - Miniconda
 
@@ -539,6 +678,7 @@ By default, Anaconda will display in your terminal prompt which conda environmen
 ```
 conda config --set changeps1 False
 ```
+---
 
 ### R011 - Recommended Terminal Emulator
 
@@ -568,20 +708,28 @@ Kitty has a framework for easily creating terminal programs that make use of its
 ```
 kitty +kitten icat image.jpeg             # show image in the terminal (needs imagemagick)
 kitty +kitten diff file1 file2            # show diff of two files
-kitty +kitten clipboard                   # this kitten allows working with clipboard even over ssh
+kitty +kitten clipboard                   # this kitten allows working with clipboard even over SSH
 ```
 The official documentation for kittens can be found [here](https://sw.kovidgoyal.net/kitty/kittens_intro/#kittens).
 
+If you use certain kittens in your worklow quite often, we recommend creating aliases for them in your `~/.bash_aliases` file or equivalent.
+
 #### **Terminal Issues with SSH and kitty**
-When kitty is used to ssh into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an ssh kitten to automate exactly this.
+When kitty is used to SSH into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an SSH kitten to automate exactly this.
 ```
 kitty +kitten ssh user@host
 ```
-You may want to set it as an alias for ssh. Alternatively, if you are still having issues, you can manually change your `$TERM` env variable to something like `xterm_256color`, but this might reduce some of the useful features of kitty.
+You may want to set it as an alias for SSH. Alternatively, if you are still having issues, you can manually change your `$TERM` env variable to something like `xterm_256color`, but this might reduce some of the useful features of kitty. To use `xterm_256color`, the package `xterm` needs to be installed but this should already the case on most systems that runs X11 sessions.
+
+---
 
 ### R012 - Using Tmux and Alternatives
 
-Running a command detached from the shell session and piping the output to a file.
+When using the shell, the `&` character allows you to execute a command detached from the shell. This means processes can be started and executed in the background. Since the process will be running in the background, no messages will be outputed in `stdout`. An easy way to circumvent this issue is to pipe the output of our command to a file.
+
+Here's an simple example to demonstrate this method:
 ```
-python main.py --options >> output.txt &
+python main.py --verbose >> output.txt &
 ```
+
+More piping options can be found in [R006 - Saving Terminal Output to Disk](#r006---saving-terminal-output-to-disk).
