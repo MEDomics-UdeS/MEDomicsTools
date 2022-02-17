@@ -698,7 +698,7 @@ sudo apt update && sudo apt install kitty
 ```
 To configure Kitty, a config file should be located at `$HOME/.config/kitty/kitty.conf`. If no config file is present after install, you can copy the existing default one using this command:
 ```
-cp /usr/share/doc/kitty ~/.config/
+cp -r /usr/share/doc/kitty ~/.config/
 ```
 The official documentation for kitty can be acessed [here](https://sw.kovidgoyal.net/kitty/conf/).
 
