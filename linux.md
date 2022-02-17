@@ -69,7 +69,6 @@ Revision | Date       | Description |
 A        | 2021-12-01 | Creation    |
 A        | 2021-12-02 | Update      |
 G        | 2022-02-15 | Update      |
-G        | 2022-02-15 | Git section |
 
 ## To-Do
 
