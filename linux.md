@@ -457,7 +457,7 @@ This will result in the copy of the `my_cats` directory on the remote server at 
 ### R009 - Using Git
 Most of the documentation found here is from the [ArchWiki](https://wiki.archlinux.org/title/Git). You are invited to check the link if you need further details.
 
-Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contribution between said project.
+Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contributions between developers of said project.
 
 Git should either be installed by default or your system, otherwise you can install `git` using the git package:
 ```
