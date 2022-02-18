@@ -32,10 +32,24 @@ This document presents some Linux tips and tricks to improve your Linux experien
     - [**Using Custom Host Names For Your SSH Connections**](#using-custom-host-names-for-your-ssh-connections)
     - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
     - [R009 - Using Git](#r009---using-git)
+      - [**Getting Started**](#getting-started)
+      - [**Generating a SSH Key for GitHub**](#generating-a-ssh-key-for-github)
+      - [**A Few Useful Commands**](#a-few-useful-commands)
+      - [*Getting a Git repository*](#getting-a-git-repository)
+      - [*Recording changes*](#recording-changes)
+      - [*Committing changes*](#committing-changes)
+      - [*Undoing things*](#undoing-things)
+      - [*Using branches*](#using-branches)
+      - [*Syncing changes with the remote*](#syncing-changes-with-the-remote)
     - [R010 - Using Anaconda](#r010---using-anaconda)
       - [**Installing Anaconda**](#installing-anaconda)
       - [**Installing Miniconda**](#installing-miniconda)
       - [**Creating a Conda Environment**](#creating-a-conda-environment)
+    - [R011 - Recommended Terminal Emulator](#r011---recommended-terminal-emulator)
+      - [**Installing Kitty**](#installing-kitty)
+      - [**Using Kittens**](#using-kittens)
+      - [**Terminal Issues with SSH and kitty**](#terminal-issues-with-ssh-and-kitty)
+    - [R012 - Using Tmux and Alternatives](#r012---using-tmux-and-alternatives)
 
 NOTES: 
 
@@ -54,6 +68,7 @@ Revision | Date       | Description |
 ---------| -----------| ----------- |
 A        | 2021-12-01 | Creation    |
 A        | 2021-12-02 | Update      |
+G        | 2022-02-15 | Update      |
 
 ## To-Do
 
@@ -62,8 +77,10 @@ A        | 2021-12-02 | Update      |
 - [x] vim/nano (Achille)
 - [x] Save terminal output to disk (Achille)
 - [x] ssh (Achille)
-- [ ] scp (Nicolas)
-- [ ] git (Achille)
+- [x] scp (Nicolas)
+- [x] git 
+- [ ] Tmux
+- [x] Kitty
 - [ ] alias + bashrc (Nicolas: add stuff to Simon's part)
 
 ## Standard
@@ -153,19 +170,16 @@ We recommend you install the [Starship Prompt](https://starship.rs/) to better u
 
 2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the Hack Nerd Font Complete as your default font.
    
-3. Downloading the starship prompt.
+3. Downloading the starship prompt. (Commands for bash prompt only)
    ```
-   sudo apt install curl && sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-   ```
-
-4. Adding this line at the end of your '\~/.bashrc' file
-   ```
-   eval "$(starship init bash)"
+   sudo apt install curl && \
+   sh -c "$(curl -fsSL https://starship.rs/install.sh)" && \
+   echo '\n# Starting the starship prompt\neval "$(starship init bash)"' >> ~/.bashrc
    ```
 
-5. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
+4. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
    ```
-   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/custom_files/starship.toml"
+   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/Configs/starship.toml"
    ```
 
 
@@ -439,26 +453,170 @@ This will result in the copy of the `my_cats` directory on the remote server at 
 
 ---
 
-### R009 - Using Git 
+### R009 - Using Git
+Most of the documentation found here is from the [ArchWiki](https://wiki.archlinux.org/title/Git). You are invited to check the link if you need further details.
 
-There is a lot of ground to cover here.
+Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contributions between developers of said project.
+
+Git should either be installed by default or your system, otherwise you can install `git` using the git package:
+```
+sudo apt update && sudo apt install git
+```
+
+#### **Getting Started**
+In order to use Git you need to set at least a name and email:
+
+```
+git config --global user.name  "Marcel Carre"
+git config --global user.email "Marcel.m_harcele@example.com"
+```
+See [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) for more information.
+
+#### **Generating a SSH Key for GitHub**
+
+We recommend the use of a SSH key to interact with your GitHub account. This is a secure way to access your online github account. Instead of simply entering your login information into a non-secured git config file in your computer, we use the ssh-keygen utility and link our newly generated key to the ssh-agent. The steps to generate a SSH key and link it to your GitHub account can be found [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+#### **A Few Useful Commands**
+
+Here we list a few of the most used commands for git. To dig deeper, you can have a look at the official documentaition [here](https://git-scm.com/doc).
+
+#### *Getting a Git repository*
+
+How to initialize a repository, `see git-init(1)`:
+```
+git init
+```
+
+How to clone an existing repository, `see git-clone(1)`:
+```
+git clone <repository_url>
+```
+
+#### *Recording changes*
+
+Git projects have a staging area, which is an index file in your Git directory, that stores the changes that will go into your next commit. To record a modified file you therefore firstly need to add it to the index (stage it). The git commit command then stores the current index in a new commit.
+
+How to add working tree changes to the index, `see git-add(1)`:
+```
+git add <file>
+```
+
+How to remove changes from the index, `see git-reset(1)`:
+```
+git reset <options>
+```
+
+How to show changes to be committed, unstaged changes and untracked files, `git-status(1)`:
+```
+git status
+```
+
+You can tell Git to ignore certain untracked files using .gitignore files, `see gitignore(5)`.
+
+#### *Committing changes*
+
+The `git commit` command records the staged changes to the repository, `see git-commit(1)`.
+- -m – supply the commit message as an argument, instead of composing it in your default text editor
+```
+git commit -m "MESSAGE"
+```
+
+- -a – automatically stage files that have been modified or deleted (does not add untracked files)
+```
+git commit -a
+```
+
+- --amend – redo the last commit, amending the commit message or the committed files
+```
+git commit --amend
+```
+**Tip: Always commit small changes frequently and with meaningful messages.**
+
+#### *Undoing things*
+
+These commands are used to undo changes in your repository.
+Restore working tree files, `see git-checkout(1)`:
+```
+git checkout
+```
+
+Reset current HEAD to the specified state, `see git-reset(1)`:
+```
+git reset
+```
+
+Revert some existing commits, `see git-revert(1)`:
+```
+git revert
+```
+
+#### *Using branches*
+
+Fixes and new features are usually tested in branches. When changes are satisfactory they can merged back into the default (master) branch.
+
+Create a branch, whose name accurately reflects its purpose:
+```
+git branch <branch_name>
+```
+
+List branches:
+```
+git branch
+```
+
+Switch branches:
+```
+git checkout <branch_name>
+```
+
+Create and switch:
+```
+git checkout -b <branch_name>
+```
+
+When done with a branch, delete it with:
+```
+git branch -d <branch_name>
+```
+
+#### *Syncing changes with the remote*
+
+Using git allows us to keep our files up to date across the different branches of our repositories.
+
+To update your local branch with the remote:
+```
+git pull
+```
+
+To merge your local commits with the remote and apply your changes:
+```
+git push location branch
+```
+
+When git clone is performed, it records the original location and gives it a remote name of origin.
+So what typically is done is this:
+```
+git push origin master
+```
+
+If the -u (--set-upstream) option is used, the location is recorded so the next time just a git push is necessary.
 
 ---
 
 ### R010 - Using Anaconda
 
-Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are 2 main Anaconda products available for individual use:
+Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are two main Anaconda products available for individual use:
 - Anaconda
 - Miniconda
 
 #### **Installing Anaconda**
 
-They both accomplish the same tasks, but the packages come in a different way. Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
+Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
 
 
 #### **Installing Miniconda**
 
-Alternatively, you can use miniconda. Miniconda only comes with essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
+Alternatively, you can use miniconda. Miniconda only comes with the essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
 
 ```
 # Installing Miniconda
@@ -466,7 +624,7 @@ Alternatively, you can use miniconda. Miniconda only comes with essential packag
 sudo apt update && sudo apt install curl && \
 curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
 cd ~ && \
-sudo chmod +x miniconda.sh && \
+chmod +x miniconda.sh && \
 bash miniconda.sh
 ```
 
@@ -511,7 +669,7 @@ conda deactivate
 To completely remove a conda environment, you can use this command:
 
 ```
-conda env remove -n ENV_NAME
+conda env remove -n <Environment name>
 ```
 
 By default, Anaconda will display in your terminal prompt which conda environment you are currently using. If you are using the recommended [Starship Prompt](#using-a-customized-terminal-prompt), this behavior can be redundant. You can disable Anaconda from showing you the current environment by typing this command:
@@ -519,3 +677,58 @@ By default, Anaconda will display in your terminal prompt which conda environmen
 ```
 conda config --set changeps1 False
 ```
+---
+
+### R011 - Recommended Terminal Emulator
+
+We recommend using [Kitty](https://sw.kovidgoyal.net/kitty/) as a terminal emulator. This terminal has a lot of useful features such as:
+- Offloading the rendering to the GPU for lower system loads
+- Offers minimal latency compared to other terminal emulators
+- Supports font ligatures and emoji
+- Supports hyperlinks
+- Supports Graphicsm with images and animations inside the terminal session
+- Highly configurable within it's config file
+
+#### **Installing Kitty**
+
+To install kitty, simply run the following command:
+```
+sudo apt update && sudo apt install kitty
+```
+To configure Kitty, a config file should be located at `$HOME/.config/kitty/kitty.conf`. If no config file is present after install, you can copy the existing default one using this command:
+```
+cp -r /usr/share/doc/kitty ~/.config/
+```
+The official documentation for kitty can be acessed [here](https://sw.kovidgoyal.net/kitty/conf/).
+
+#### **Using Kittens**
+
+Kitty has a framework for easily creating terminal programs that make use of its advanced features. These programs are called kittens. Kittens are submodules written in python to extend the functionality of kitty. They can also be used both to create useful standalone programs. Here are some of the most used ones:
+```
+kitty +kitten icat image.jpeg             # show image in the terminal (needs imagemagick)
+kitty +kitten diff file1 file2            # show diff of two files
+kitty +kitten clipboard                   # this kitten allows working with clipboard even over SSH
+```
+The official documentation for kittens can be found [here](https://sw.kovidgoyal.net/kitty/kittens_intro/#kittens).
+
+If you use certain kittens in your worklow quite often, we recommend creating aliases for them in your `~/.bash_aliases` file or equivalent.
+
+#### **Terminal Issues with SSH and kitty**
+When kitty is used to SSH into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an SSH kitten to automate exactly this.
+```
+kitty +kitten ssh user@host
+```
+You may want to set it as an alias for SSH. Alternatively, if you are still having issues, you can manually change your `$TERM` env variable to something like `xterm_256color`, but this might reduce some of the useful features of kitty. To use `xterm_256color`, the package `xterm` needs to be installed but this should already the case on most systems that runs X11 sessions.
+
+---
+
+### R012 - Using Tmux and Alternatives
+
+When using the shell, the `&` character allows you to execute a command detached from the shell. This means processes can be started and executed in the background. Since the process will be running in the background, no messages will be outputed in `stdout`. An easy way to circumvent this issue is to pipe the output of our command to a file.
+
+Here's an simple example to demonstrate this method:
+```
+python main.py --verbose >> output.txt &
+```
+
+More piping options can be found in [R006 - Saving Terminal Output to Disk](#r006---saving-terminal-output-to-disk).
