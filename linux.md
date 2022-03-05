@@ -4,30 +4,52 @@ This document presents some Linux tips and tricks to improve your Linux experien
 
 ## Table of Contents
 - [MEDomicsTools Linux Tips](#medomicstools-linux-tips)
-  * [Table of Contents](#table-of-contents)
-  * [Contributors](#contributors)
-  * [Changelog](#changelog)
-  * [To-Do](#to-do)
-  * [Standard](#standard)
-    + [R000 - Aliases](#r000---aliases)
-    + [R001 - Terminal](#r001---terminal)
-      - [**Overview**](#--overview--)
-      - [**Terminal Window**](#--terminal-window--)
-      - [**Terminal Tabs**](#--terminal-tabs--)
-      - [**Terminal Display**](#--terminal-display--)
-      - [**Terminal Input**](#--terminal-input--)
-      - [**Pimping the terminal**](#--pimping-the-terminal--)
-    + [R002 - Working Directory](#r002---working-directory)
-    + [R003 - Absolute and Relative Path](#r003---absolute-and-relative-path)
-    + [R004 - Basic Commands](#r004---basic-commands)
-      - [**Directories**](#--directories--)
-      - [**Files**](#--files--)
-    + [R005 - Vim and Nano](#r005---vim-and-nano)
+  - [Table of Contents](#table-of-contents)
+  - [Contributors](#contributors)
+  - [Changelog](#changelog)
+  - [To-Do](#to-do)
+  - [## Standard](#-standard)
+    - [R000 - Aliases](#r000---aliases)
+    - [R001 - Terminal](#r001---terminal)
+      - [**Overview**](#overview)
+      - [**Terminal Window**](#terminal-window)
+      - [**Terminal Tabs**](#terminal-tabs)
+      - [**Terminal Display**](#terminal-display)
+      - [**Terminal Input**](#terminal-input)
+  - [**Using a Customized Terminal Prompt**](#using-a-customized-terminal-prompt)
+    - [**Steps to install the prompt:**](#steps-to-install-the-prompt)
+    - [R002 - Working Directory](#r002---working-directory)
+    - [R003 - Absolute and Relative Path](#r003---absolute-and-relative-path)
+    - [R004 - Basic Commands](#r004---basic-commands)
+      - [**Directories**](#directories)
+      - [**Files**](#files)
+    - [R005 - Vim and Nano](#r005---vim-and-nano)
       - [Modes for Vim](#modes-for-vim)
       - [Exit and save](#exit-and-save)
       - [Search](#search)
-    + [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
-    + [R007 - SSH (Secure Shell)](#r007---ssh--secure-shell-)
+    - [R006 - Saving terminal output to disk](#r006---saving-terminal-output-to-disk)
+    - [R007 - SSH (Secure Shell)](#r007---ssh-secure-shell)
+    - [**Using Custom Host Names For Your SSH Connections**](#using-custom-host-names-for-your-ssh-connections)
+    - [R008 - SCP (Secure Copy)](#r008---scp-secure-copy)
+    - [R009 - Using Git](#r009---using-git)
+      - [**Getting Started**](#getting-started)
+      - [**Generating a SSH Key for GitHub**](#generating-a-ssh-key-for-github)
+      - [**A Few Useful Commands**](#a-few-useful-commands)
+      - [*Getting a Git repository*](#getting-a-git-repository)
+      - [*Recording changes*](#recording-changes)
+      - [*Committing changes*](#committing-changes)
+      - [*Undoing things*](#undoing-things)
+      - [*Using branches*](#using-branches)
+      - [*Syncing changes with the remote*](#syncing-changes-with-the-remote)
+    - [R010 - Using Anaconda](#r010---using-anaconda)
+      - [**Installing Anaconda**](#installing-anaconda)
+      - [**Installing Miniconda**](#installing-miniconda)
+      - [**Creating a Conda Environment**](#creating-a-conda-environment)
+    - [R011 - Recommended Terminal Emulator](#r011---recommended-terminal-emulator)
+      - [**Installing Kitty**](#installing-kitty)
+      - [**Using Kittens**](#using-kittens)
+      - [**Terminal Issues with SSH and kitty**](#terminal-issues-with-ssh-and-kitty)
+    - [R012 - Using Tmux and Alternatives](#r012---using-tmux-and-alternatives)
 
 NOTES: 
 
@@ -46,6 +68,7 @@ Revision | Date       | Description |
 ---------| -----------| ----------- |
 A        | 2021-12-01 | Creation    |
 A        | 2021-12-02 | Update      |
+G        | 2022-02-15 | Update      |
 
 ## To-Do
 
@@ -54,15 +77,23 @@ A        | 2021-12-02 | Update      |
 - [x] vim/nano (Achille)
 - [x] Save terminal output to disk (Achille)
 - [x] ssh (Achille)
-- [ ] scp (Nicolas)
-- [ ] git (Achille)
+- [x] scp (Nicolas)
+- [x] git 
+- [ ] Tmux
+- [x] Kitty
 - [ ] alias + bashrc (Nicolas: add stuff to Simon's part)
 
 ## Standard
 ---
 ### R000 - Aliases
 
-Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory.
+Aliases are shorthands that can be created to shorten the length of common Linux terminal commands. In Ubuntu, you can add aliases at the end of the hidden '\~/.bashrc' OR '\~/.bash_aliases' files in the 'Home' directory. 
+
+Although both are valid options, we recommend creating a separate '\~/.bash_aliases' file and adding this line to your '\~/.bashrc' file to make managing your aliases easier:
+
+```
+source ~/.bash_aliases
+```
 
 The following is a list of [Simon](https://github.com/sgiardl)'s Linux aliases:
 ```
@@ -123,9 +154,34 @@ Shell, Prompt, Terminal or Console are all various names to describe the text in
 - **Shift+Ctrl+C**: copy highligthed text.
 - **Shift+Ctrl+V**: paste from clipboard at the cursor position.
 
-#### **Pimping the terminal**
+## **Using a Customized Terminal Prompt**
 
-Much like aliases, it is possible to modify the user's '~/.bashrc' file to customize the terminal. The *how* is hard to explain briefly thus we recommend consulting this [guide](https://www.fosslinux.com/21753/how-to-customize-your-ubuntu-terminal-prompt.htm).
+We recommend you install the [Starship Prompt](https://starship.rs/) to better use the terminal. It's a cross platform shell that has a lot of features, notably:
+- Displaying the active Anaconda environment
+- Showing which languages are used for the scripts in your current directory
+- Letting you know which git branch you are currently working on, and if modifications are present
+- And lots more...
+  
+### **Steps to install the prompt:**
+1. You need to install a Nerd Font. We recommend the Hack Nerd Font Complete.
+    ```
+    sudo apt update && sudo apt install fonts-hack
+    ```
+
+2. Enabling the Hack Font in your terminal of choice. You can navigate to the preferences menu of your terminal and selecting the Hack Nerd Font Complete as your default font.
+   
+3. Downloading the starship prompt. (Commands for bash prompt only)
+   ```
+   sudo apt install curl && \
+   sh -c "$(curl -fsSL https://starship.rs/install.sh)" && \
+   echo '\n# Starting the starship prompt\neval "$(starship init bash)"' >> ~/.bashrc
+   ```
+
+4. Alternatively, if you are not a fan of emojis in your terminal prompt, you can replace them with symbols using this command
+   ```
+   sh -c "cd ~/.config && curl -O https://raw.githubusercontent.com/sgiardl/MEDomicsTools/main/Configs/starship.toml"
+   ```
+
 
 ---
 ### R002 - Working Directory
@@ -327,5 +383,352 @@ Where 'remote host' is an existing IP adress or domain that you will be connecti
 When connecting to a remote host with different username, use the syntax:
 `ssh <remote username>@<remote host>`
 
+A useful feature of `ssh` is that it can be used to do X11 forwarding. This will forward every windows you open on your remote server to your computer. To enable X11 forwarding, use the syntax: `ssh -Y <remote username>@<remote host>`. Since X11 forwarding can be slow for heavy or extended work, we recommend using [TeamViewer](https://www.teamviewer.com/en-us/download/linux/) in such use cases.
+
 You might be prompted to enter the password. Once it is done, you will see the current shell change to the remote user@remote host. To exit, simply type
 `exit`.
+
+### **Using Custom Host Names For Your SSH Connections**
+
+Remembering every device's IP address that you need remote access into can be troublesome. A good way to keep track of those addresses is by writing [aliases](#r000---aliases).
+
+```
+# Example of a custom alias
+
+alias alienware="ssh <username>@192.168.0.1"
+```
+
+Although this is a prefectly acceptable solution, we recommend using a separate file to store every remote hosts you might want access to.
+
+1. Create a config file inside of your '\~/.ssh' directory
+   ```
+   mkdir -p ~/.ssh && touch ~/.ssh/config
+   ```
+
+2. Adding entries to the '\~/.ssh/config' file
+   ```
+   Host <Custom Remote access name>
+      HostName <IP Adress of the remote server>
+      User <Username to access remote server>
+   ```
+   ```
+   # Example of a valid '~/.ssh/config' file
+
+   Host Alienware_GRIIS
+     HostName 10.244.54.13
+     User guillaume
+
+   Host archVM
+     HostName 42.69.42.69
+     User McLovin
+   ```
+
+You will now be able to remote access into your servers using the `ssh` command as follows:
+```
+ssh Alienware_GRIIS
+```
+
+---
+
+### R008 - SCP (Secure Copy)
+
+The `scp` command can be used to copy files to a remote server securely using ssh. The command uses this syntax: 
+```
+scp <file 1> <file 2> <file 3> ... <remote username>@<remote server>:<remote path>
+```
+
+Here is a real world example of how to use the `scp` command. We will assume that you have set up custom ssh host names as suggested [here](#using-custom-host-names-for-your-ssh-connections).
+
+```
+scp cute_cat.png feral_cat.png purrfect_cat.png Alienware_GRIIS:/home/guillaume/Cats/
+```
+
+You can also copy an entire directory recursively using the `-r` flag:
+
+```
+scp -r my_cats/ Alienware_GRIIS:/home/guillaume/
+```
+
+This will result in the copy of the `my_cats` directory on the remote server at `/home/guillaume/my_cats/`
+
+---
+
+### R009 - Using Git
+Most of the documentation found here is from the [ArchWiki](https://wiki.archlinux.org/title/Git). You are invited to check the link if you need further details.
+
+Git is a version control system developped by Linus Torvalds, a famous Nvidia enthusiast. Git is used to manage different version of files in a project and allows easy contributions between developers of said project.
+
+Git should either be installed by default or your system, otherwise you can install `git` using the git package:
+```
+sudo apt update && sudo apt install git
+```
+
+#### **Getting Started**
+In order to use Git you need to set at least a name and email:
+
+```
+git config --global user.name  "Marcel Carre"
+git config --global user.email "Marcel.m_harcele@example.com"
+```
+See [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) for more information.
+
+#### **Generating a SSH Key for GitHub**
+
+We recommend the use of a SSH key to interact with your GitHub account. This is a secure way to access your online github account. Instead of simply entering your login information into a non-secured git config file in your computer, we use the ssh-keygen utility and link our newly generated key to the ssh-agent. The steps to generate a SSH key and link it to your GitHub account can be found [here](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
+
+#### **A Few Useful Commands**
+
+Here we list a few of the most used commands for git. To dig deeper, you can have a look at the official documentaition [here](https://git-scm.com/doc).
+
+#### *Getting a Git repository*
+
+How to initialize a repository, `see git-init(1)`:
+```
+git init
+```
+
+How to clone an existing repository, `see git-clone(1)`:
+```
+git clone <repository_url>
+```
+
+#### *Recording changes*
+
+Git projects have a staging area, which is an index file in your Git directory, that stores the changes that will go into your next commit. To record a modified file you therefore firstly need to add it to the index (stage it). The git commit command then stores the current index in a new commit.
+
+How to add working tree changes to the index, `see git-add(1)`:
+```
+git add <file>
+```
+
+How to remove changes from the index, `see git-reset(1)`:
+```
+git reset <options>
+```
+
+How to show changes to be committed, unstaged changes and untracked files, `git-status(1)`:
+```
+git status
+```
+
+You can tell Git to ignore certain untracked files using .gitignore files, `see gitignore(5)`.
+
+#### *Committing changes*
+
+The `git commit` command records the staged changes to the repository, `see git-commit(1)`.
+- -m – supply the commit message as an argument, instead of composing it in your default text editor
+```
+git commit -m "MESSAGE"
+```
+
+- -a – automatically stage files that have been modified or deleted (does not add untracked files)
+```
+git commit -a
+```
+
+- --amend – redo the last commit, amending the commit message or the committed files
+```
+git commit --amend
+```
+**Tip: Always commit small changes frequently and with meaningful messages.**
+
+#### *Undoing things*
+
+These commands are used to undo changes in your repository.
+Restore working tree files, `see git-checkout(1)`:
+```
+git checkout
+```
+
+Reset current HEAD to the specified state, `see git-reset(1)`:
+```
+git reset
+```
+
+Revert some existing commits, `see git-revert(1)`:
+```
+git revert
+```
+
+#### *Using branches*
+
+Fixes and new features are usually tested in branches. When changes are satisfactory they can merged back into the default (master) branch.
+
+Create a branch, whose name accurately reflects its purpose:
+```
+git branch <branch_name>
+```
+
+List branches:
+```
+git branch
+```
+
+Switch branches:
+```
+git checkout <branch_name>
+```
+
+Create and switch:
+```
+git checkout -b <branch_name>
+```
+
+When done with a branch, delete it with:
+```
+git branch -d <branch_name>
+```
+
+#### *Syncing changes with the remote*
+
+Using git allows us to keep our files up to date across the different branches of our repositories.
+
+To update your local branch with the remote:
+```
+git pull
+```
+
+To merge your local commits with the remote and apply your changes:
+```
+git push location branch
+```
+
+When git clone is performed, it records the original location and gives it a remote name of origin.
+So what typically is done is this:
+```
+git push origin master
+```
+
+If the -u (--set-upstream) option is used, the location is recorded so the next time just a git push is necessary.
+
+---
+
+### R010 - Using Anaconda
+
+Anaconda is the world’s most popular Python distribution platform. It is used to manage virtual environments and distribute python packages. There are two main Anaconda products available for individual use:
+- Anaconda
+- Miniconda
+
+#### **Installing Anaconda**
+
+Anaconda comes with multiples conda packages built-in. This obviously comes in a larger file, but this option should have most of what you would need to get started. You can download Anaconda [here](https://www.anaconda.com/products/individual).
+
+
+#### **Installing Miniconda**
+
+Alternatively, you can use miniconda. Miniconda only comes with the essential packages. You will need to install the packages you need after the installation. This makes it easier to maintain and is the preferred option by many. We provide a script to install miniconda easily.
+
+```
+# Installing Miniconda
+
+sudo apt update && sudo apt install curl && \
+curl -o ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+cd ~ && \
+chmod +x miniconda.sh && \
+bash miniconda.sh
+```
+
+After miniconda has been installed, can now safely remove the 'miniconda.sh' file.
+
+```
+rm ~/miniconda.sh
+```
+
+#### **Creating a Conda Environment**
+
+Conda environment makes managing dependencies easier over multiple projects. It ensures that the version of a package you need in a project will not be affected by another project on your computer that needs a different version of the same package. To create a Conda environment, use the following command:
+
+```
+conda create -n <Environment name> python=<python version>
+```
+
+```
+# Example of a Conda environment
+
+conda create -n MEDomicsTools python=3.8
+```
+
+To use your newly created environment, you use the following command:
+
+```
+conda active MEDomicsTools
+```
+
+Once in your environment, you can install the packages you need with either the `conda` package manager or `pip`.
+
+```
+conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch
+```
+
+To quit a conda environment, you can use the following command:
+
+```
+conda deactivate
+```
+
+To completely remove a conda environment, you can use this command:
+
+```
+conda env remove -n <Environment name>
+```
+
+By default, Anaconda will display in your terminal prompt which conda environment you are currently using. If you are using the recommended [Starship Prompt](#using-a-customized-terminal-prompt), this behavior can be redundant. You can disable Anaconda from showing you the current environment by typing this command:
+
+```
+conda config --set changeps1 False
+```
+---
+
+### R011 - Recommended Terminal Emulator
+
+We recommend using [Kitty](https://sw.kovidgoyal.net/kitty/) as a terminal emulator. This terminal has a lot of useful features such as:
+- Offloading the rendering to the GPU for lower system loads
+- Offers minimal latency compared to other terminal emulators
+- Supports font ligatures and emoji
+- Supports hyperlinks
+- Supports Graphicsm with images and animations inside the terminal session
+- Highly configurable within it's config file
+
+#### **Installing Kitty**
+
+To install kitty, simply run the following command:
+```
+sudo apt update && sudo apt install kitty
+```
+To configure Kitty, a config file should be located at `$HOME/.config/kitty/kitty.conf`. If no config file is present after install, you can copy the existing default one using this command:
+```
+cp -r /usr/share/doc/kitty ~/.config/
+```
+The official documentation for kitty can be acessed [here](https://sw.kovidgoyal.net/kitty/conf/).
+
+#### **Using Kittens**
+
+Kitty has a framework for easily creating terminal programs that make use of its advanced features. These programs are called kittens. Kittens are submodules written in python to extend the functionality of kitty. They can also be used both to create useful standalone programs. Here are some of the most used ones:
+```
+kitty +kitten icat image.jpeg             # show image in the terminal (needs imagemagick)
+kitty +kitten diff file1 file2            # show diff of two files
+kitty +kitten clipboard                   # this kitten allows working with clipboard even over SSH
+```
+The official documentation for kittens can be found [here](https://sw.kovidgoyal.net/kitty/kittens_intro/#kittens).
+
+If you use certain kittens in your worklow quite often, we recommend creating aliases for them in your `~/.bash_aliases` file or equivalent.
+
+#### **Terminal Issues with SSH and kitty**
+When kitty is used to SSH into a remote that does not have its terminfo, various issues can occur. The solution is normally to copy over the terminfo. Kitty has an SSH kitten to automate exactly this.
+```
+kitty +kitten ssh user@host
+```
+You may want to set it as an alias for SSH. Alternatively, if you are still having issues, you can manually change your `$TERM` env variable to something like `xterm_256color`, but this might reduce some of the useful features of kitty. To use `xterm_256color`, the package `xterm` needs to be installed but this should already the case on most systems that runs X11 sessions.
+
+---
+
+### R012 - Using Tmux and Alternatives
+
+When using the shell, the `&` character allows you to execute a command detached from the shell. This means processes can be started and executed in the background. Since the process will be running in the background, no messages will be outputed in `stdout`. An easy way to circumvent this issue is to pipe the output of our command to a file.
+
+Here's an simple example to demonstrate this method:
+```
+python main.py --verbose >> output.txt &
+```
+
+More piping options can be found in [R006 - Saving Terminal Output to Disk](#r006---saving-terminal-output-to-disk).

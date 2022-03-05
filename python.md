@@ -4,30 +4,30 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
 
 ## Table of Contents
 - [MEDomicsTools Python Coding Standard](#medomicstools-python-coding-standard)
-  * [Table of Contents](#table-of-contents)
-  * [Changelog](#changelog)
-  * [Contributors](#contributors)
-  * [To-Do](#to-do)
-  * [Standard](#standard)
-    + [R000 - Recommended Software](#r000---recommended-software)
-    + [R001 - Universite de Sherbrooke Computer Science Department Programming Standard](#r001---universite-de-sherbrooke-computer-science-department-programming-standard)
-    + [R002 - Project Repository Structure](#r002---project-repository-structure)
-    + [R003 - Pythonic - The Zen of Python - PEP 20](#r003---pythonic---the-zen-of-python---pep-20)
-    + [R004 - Main](#r004---main)
-    + [R005 - Paths - Working Directory](#r005---paths---working-directory)
-    + [R006 - Style - PEP 8](#r006---style---pep-8)
-    + [R007 - Naming Variables - Functions - Classes](#r007---naming-variables---functions---classes)
-    + [R008 - Type Hinting - PEP 484](#r008---type-hinting---pep-484)
-    + [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
-    + [R010 - Comments](#r010---comments)
-    + [R011 - String Quotes](#r011---string-quotes)
-    + [R012 - f-strings](#r012---f-strings)
-    + [R013 - r-strings](#r013---r-strings)
-    + [R014 - Multiprocessing and Compilation](#r014---multiprocessing-and-compilation)
-    + [R015 - Enumerations - PEP 435](#r015---enumerations---pep-435)
-    + [R016 - Abstract Classes - PEP 3119](#r016---abstract-classes---pep-3119)
-    + [R017 - Encapsulation - Private vs Protected vs Public](#r017---encapsulation---private-vs-protected-vs-public)
-    + [R018 - Decorators](#r018---decorators)
+  - [Table of Contents](#table-of-contents)
+  - [Contributors](#contributors)
+  - [Changelog](#changelog)
+  - [To-Do](#to-do)
+  - [Standard](#standard)
+    - [R000 - Recommended Software](#r000---recommended-software)
+    - [R001 - Universite de Sherbrooke Computer Science Department Programming Standard](#r001---universite-de-sherbrooke-computer-science-department-programming-standard)
+    - [R002 - Project Repository Structure](#r002---project-repository-structure)
+    - [R003 - Pythonic - The Zen of Python - PEP 20](#r003---pythonic---the-zen-of-python---pep-20)
+    - [R004 - Main](#r004---main)
+    - [R005 - Paths - Working Directory](#r005---paths---working-directory)
+    - [R006 - Style - PEP 8](#r006---style---pep-8)
+    - [R007 - Naming Variables - Functions - Classes](#r007---naming-variables---functions---classes)
+    - [R008 - Type Hinting - PEP 484](#r008---type-hinting---pep-484)
+    - [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
+    - [R010 - Comments](#r010---comments)
+    - [R011 - String Quotes](#r011---string-quotes)
+    - [R012 - f-strings](#r012---f-strings)
+    - [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
+    - [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
+    - [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
+    - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
+    - [R017 - Decorators](#r017---decorators)
+    - [R018 - Project Requirements](#r018---project-requirements)
 
 NOTES: 
 
@@ -48,6 +48,7 @@ NOTES:
 
 Revision | Date       | Description |
 ---------| -----------| ----------- |
+E        | 2022-02-10 | Added 'pipreqs' details    |
 D        | 2021-12-01 | Updated based on team's comments    |
 C        | 2021-10-04 | Added new items in to-do list    |
 B        | 2021-09-13 | Updated based on team's comments    |
@@ -56,9 +57,9 @@ A        | 2021-08-08 | Creation    |
 ## To-Do
 
 - [ ] Class inheritance vs aggregation (Mahdi)
-- [ ] decorators : staticmethod classmethod abstractmethod (Nicolas)
-- [ ] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
-- [ ] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
+- [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
+- [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
+- [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
@@ -79,7 +80,7 @@ Operating System:
 - Arch Linux: https://archlinux.org/ (if you like to live dangerously)
 
 Package Suite & Environment Manager:
-- Anaconda: https://www.anaconda.com/products/individual
+- Anaconda: https://github.com/sgiardl/MEDomicsTools/blob/main/linux.md#using-anaconda
 
 IDE:
 - PyCharm Professional (free for students): https://www.jetbrains.com/shop/eform/students
@@ -140,7 +141,7 @@ for i in range(len(my_list)):
     sum = sum + my_list[i]
     
 # Good Pythonic Vectorized Way
-my_sum = sum(my_list)
+my_sum = sum(my_list)### R018 - Project Requirements
 ```
 - Use List Comprehension as much as possible. For example, to filter out a list:
 ```python
@@ -231,6 +232,7 @@ To help follow the PEP 8, you can use an IDE with a built-in PEP 8 syntax checke
 - Adopt "snake_case" OR "camelCase" (but not both) when naming variables, functions, methods and attributes.
 - Use descriptive names for variables.
 - For functions and methods, start the name with an imperative action verb, (except boolean return value: can be a question).
+- For functions and methods, enumerate the arguments (following 'self' if it's a method) by adding a new line between each of them.
 - For class names, start each word with a capital letter (Pascal case).
 - Class names should represent an object or an actor that can execute concrete actions.
 - Use all-caps for constants names. Place all constants in a separate file called 'constants.py'.
@@ -262,7 +264,10 @@ NUM_WORKERS = 24
 IMAGE_EXT = 'jpg'
 
 # Equations
-def calculate_y(m: float, x: float, b: float) -> float:
+def calculate_y(m: float,
+                x: float,
+                b: float) -> float:
+  
     return m * x + b
 ```
 
@@ -482,7 +487,7 @@ class MyAbstractClass(ABC):
         pass
 ```
 
-- @staticmethod: When access to the object itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
+- @staticmethod: When the access to the instance of a class itself is unneeded in a method, adding this decorator will remove the need to add 'self' as the first argument.
 ```python
 class MyClass:
     def __init__(self) -> None:
@@ -495,13 +500,39 @@ class MyClass:
     def calculate_new_area(x: float, y: float) -> float:
         return x * y
 ```
-
-- @classmethod
-
-To Do
-
-- @property
-
-To Do (already in other rule pertaining to encapsulation & private attributes)
+- @classmethod: When the access to the instance of a class is unneeded but the access to the class itself is needed, adding this decorator will force the need of 'cls' as the first argument.
+An example of usage could be to provide a class with a different constructor.
+```python
+class Square:
+    def __init__(self, side_length_in_cm: float) -> None:
+        self.length = side_length_in_cm
+    
+    @classmethod
+    def from_decimeter(cls, side_length_in_dm: float):
+        return cls(side_length_in_cm=side_length_in_dm*10)
+```
 
 - @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
+
+### R018 - Project Requirements
+
+In the root folder of your repository, add a 'requirements.txt' file containing a list of all Python packages and versions used in your project. 
+
+The following terminal command is **NOT** recommended, since it will generate a list of ALL packages in your actual environment, not only the ones that are used in the project:
+```
+# DO NOT USE THIS
+pip freeze > requirements.txt
+```
+
+The 'pipreqs' package is recommended instead. It will only list the packages and versions that are imported in the project files. First, install the 'pipreqs' package:
+
+```
+# USE THIS
+pip install pipreqs
+```
+
+Then, simply run the following command in the root folder of your project:
+```
+# USE THIS
+pipreqs --force
+```
