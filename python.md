@@ -22,8 +22,8 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R010 - Comments](#r010---comments)
     - [R011 - String Quotes](#r011---string-quotes)
     - [R012 - f-strings and r-strings](#r012---f-strings-and-r-strings)
-        - [f-strings](#f-string)
-        - [r-strings](#r-string)
+        - [f-strings](#f-strings)
+        - [r-strings](#r-strings)
     - [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
     - [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
     - [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
@@ -320,7 +320,7 @@ Use either ' OR " for strings delimiters, but not both.
 
 ### R012 - f-strings and r-strings
 
-- f-strings
+- #### f-strings
 
     The most useful way to manage strings in Python is the f-string, which was introduced in Python 3.6. Use f-strings whenever possible to enhance code readability. More details can be found at the following link: https://docs.python.org/3/reference/lexical_analysis.html#f-strings.
 
@@ -336,7 +336,7 @@ Use either ' OR " for strings delimiters, but not both.
     print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
     ```
 
-- r-strings
+- #### r-strings
 
     r-strings or Python raw string is a string with the prefix 'r' or 'R'. r-string treats backslach(\\) as literal character and not as an escape caracter.
 
