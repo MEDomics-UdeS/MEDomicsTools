@@ -67,7 +67,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
 - [ ] Lines wrapping/continuation (Mahdi)
 - [x] r-strings (Mahdi)
-- [ ] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
+- [x] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
 - [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
 - [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
 
@@ -515,8 +515,49 @@ class Square:
     def from_decimeter(cls, side_length_in_dm: float):
         return cls(side_length_in_cm=side_length_in_dm*10)
 ```
+- @property: A built-in decorator for the property() function in python. It makes the functions act as getters, setters or deleters. This is explained best with an example :
+```python
+class Person:
 
+	def __init__(self, name):
+		self._name = name
+
+	@property
+	def price(self):
+		return self._name
+	
+	@price.setter
+	def name(self, new_name):
+        if isinstance(new_name, str):
+		    self._name = new_name
+        else:
+            print("Please enter a valid name")
+
+	@price.deleter
+	def name(self):
+		del self._name
+```
+-@deprecated : A python decorator to deprecate old python classes, functions or methods. Usage :
+```python
+from deprecated import deprecated
+
+class Person(object):
+    @deprecated
+    def some_old_method(self):
+        print(self._name)
+```
+You can use it with a "reason" message to help choose another alternative.
+```python
+from deprecated import deprecated
+
+class Person(object):
+    @deprecated(reason="This is an old method, use show_name() instead")
+    def some_old_method(self):
+        print(self._name)
+```
 - @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
+
+Python has more awesome decorators for you, find out more about it here : [Python awesome decorators](https://github.com/lord63/awesome-python-decorator).
 
 ### R018 - Project Requirements
 
