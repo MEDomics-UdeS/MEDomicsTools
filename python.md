@@ -66,7 +66,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
 - [ ] Lines wrapping/continuation (Mahdi)
-- [ ] r-strings (Mahdi)
+- [x] r-strings (Mahdi)
 - [ ] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
 - [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
 - [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
