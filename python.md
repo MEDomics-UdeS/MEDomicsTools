@@ -68,7 +68,7 @@ A        | 2021-08-08 | Creation    |
 - [x] Lines wrapping/continuation (Mahdi)
 - [x] r-strings (Mahdi)
 - [x] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
-- [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
+- [x] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
 - [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
 
 ## Standard
@@ -332,7 +332,22 @@ This rule is not made to be coercitive and to force you to rewrite all your code
 
 ### R010 - Comments
 
-Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention.
+Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention. There are three types of comments that are used depending on the context:
+- #### Inline comments
+    An inline comment is a comment on the same line as the code. Inline comments should be separated by at least two spaces from the code. They should start with a # and a single space. For example :
+    ```python
+     name = "MEDomics"    # We assign a new value to the variable name
+    ```
+- #### Block comments
+    Block of comments is a multi-inline comments, each line starts with a # and a single space. It is generally applied to the code the follows them and have the same indentation as that code. For example :
+    ```python
+    # We use * for multiplication of numbers
+    # Finally we use print() function to print the value function
+    print(3 * 7)
+    ```
+- #### Documentation strings
+    Usually called 'docstrings'. Used most of the times to describe what the method does and should appear under the <em>def</em> line. For good docstings conventions refer to [R009](#r009---docstring---pep-257---google-style).
+
 
 ### R011 - String Quotes
 
