@@ -550,7 +550,7 @@ class Square:
     def from_decimeter(cls, side_length_in_dm: float):
         return cls(side_length_in_cm=side_length_in_dm*10)
 ```
-- @property: A built-in decorator for the property() function in python. It makes the functions act as getters, setters or deleters. This is explained best with an example :
+- @property: A built-in decorator for the property() function in python. It makes the functions act as getters, setters or deleters. This is explained best with an example:
 ```python
 class Person:
 
@@ -572,7 +572,7 @@ class Person:
 	def name(self):
 		del self._name
 ```
--@deprecated : A python decorator to deprecate old python classes, functions or methods. Usage :
+-@deprecated : A python decorator to deprecate old python classes, functions or methods. Example of usage:
 ```python
 from deprecated import deprecated
 
@@ -581,7 +581,7 @@ class Person(object):
     def some_old_method(self):
         print(self._name)
 ```
-You can use it with a "reason" message to help choose another alternative.
+You can use it with a "reason" message to help choose another alternative:
 ```python
 from deprecated import deprecated
 
@@ -590,7 +590,7 @@ class Person(object):
     def some_old_method(self):
         print(self._name)
 ```
-- @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
+- @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of <em>with torch.no_grad():</em>
 
 Python has more awesome decorators for you, find out more about it here : [Python awesome decorators](https://github.com/lord63/awesome-python-decorator).
 
