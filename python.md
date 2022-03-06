@@ -65,7 +65,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
-- [ ] Lines wrapping/continuation (Mahdi)
+- [x] Lines wrapping/continuation (Mahdi)
 - [x] r-strings (Mahdi)
 - [x] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
 - [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
@@ -217,6 +217,26 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
   - Surround top-level function and class definitions with two blank lines
   - Method definitions inside a class are surrounded by a single blank line
   - Add a blank line at the end of each file
+- lines wrapping and continuation
+  - The preferred way of wrapping long lines is by using Python's implied line continuation inside parentheses(<span style="color:blue">(</span>), brackets(<span style="color:blue">[</span>) and braces(<span style="color:blue">{</span>). Example of paranthesized line break: :
+    ```python
+    list(
+        "Welcome to MEDomics."
+        )
+    ```
+  - Sometimes using a backslash looks better. Make sure to indent the continued line appropriately. The preferred place to break around a binary operator is after the operator, not before it. Example of back-slashed line break:
+    ```python
+    print 'This is a very long line, \
+        but we can write it on multiple lines.'
+    ```
+  - Continuation lines should align wrapped elements either vertically using Python's implied line continuation inside parentheses (see example above), or using a hanging indent (see example down below). When using a hanging indent, there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line. The following example shows the correct way to do this :
+    ```python
+    # Hanging indents :
+    foo = some_random_func(
+        arg1, arg2,
+        arg3, arg4)
+    ```
+    see [PEP8-identation](https://www.python.org/dev/peps/pep-0008/#indentation).
 - Imports: 
   - Imports should be in alphabetical order.
   - Imports should usually be on separate lines.
