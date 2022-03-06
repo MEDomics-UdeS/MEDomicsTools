@@ -218,7 +218,7 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
   - Method definitions inside a class are surrounded by a single blank line
   - Add a blank line at the end of each file
 - lines wrapping and continuation
-  - The preferred way of wrapping long lines is by using Python's implied line continuation inside parentheses(<span style="color:blue">(</span>), brackets(<span style="color:blue">[</span>) and braces(<span style="color:blue">{</span>). Example of paranthesized line break: :
+  - The preferred way of wrapping long lines is by using Python's implied line continuation inside parentheses(<span style="color:blue">(</span>), brackets(<span style="color:blue">[</span>) and braces(<span style="color:blue">{</span>). Example of parenthesized line break: :
     ```python
     list(
         "Welcome to MEDomics."
