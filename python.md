@@ -21,7 +21,9 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R009 - Docstring - PEP 257 - Google Style](#r009---docstring---pep-257---google-style)
     - [R010 - Comments](#r010---comments)
     - [R011 - String Quotes](#r011---string-quotes)
-    - [R012 - f-strings](#r012---f-strings)
+    - [R012 - f-strings and r-strings](#r012---f-strings-and-r-strings)
+        - [f-strings](#f-strings)
+        - [r-strings](#r-strings)
     - [R013 - Multiprocessing and Compilation](#r013---multiprocessing-and-compilation)
     - [R014 - Enumerations - PEP 435](#r014---enumerations---pep-435)
     - [R015 - Abstract Classes - PEP 3119](#r015---abstract-classes---pep-3119)
@@ -63,10 +65,10 @@ A        | 2021-08-08 | Creation    |
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Achille)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Achille)
-- [ ] Lines wrapping/continuation (Mahdi)
-- [ ] r-strings (Mahdi)
-- [ ] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
-- [ ] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
+- [x] Lines wrapping/continuation (Mahdi)
+- [x] r-strings (Mahdi)
+- [x] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
+- [x] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
 - [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
 
 ## Standard
@@ -215,6 +217,26 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
   - Surround top-level function and class definitions with two blank lines
   - Method definitions inside a class are surrounded by a single blank line
   - Add a blank line at the end of each file
+- lines wrapping and continuation
+  - The preferred way of wrapping long lines is by using Python's implied line continuation inside parentheses(<span style="color:blue">(</span>), brackets(<span style="color:blue">[</span>) and braces(<span style="color:blue">{</span>). Example of parenthesized line break: :
+    ```python
+    list(
+        "Welcome to MEDomics."
+        )
+    ```
+  - Sometimes using a backslash looks better. Make sure to indent the continued line appropriately. The preferred place to break around a binary operator is after the operator, not before it. Example of back-slashed line break:
+    ```python
+    print 'This is a very long line, \
+        but we can write it on multiple lines.'
+    ```
+  - Continuation lines should align wrapped elements either vertically using Python's implied line continuation inside parentheses (see example above), or using a hanging indent (see example down below). When using a hanging indent, there should be no arguments on the first line and further indentation should be used to clearly distinguish itself as a continuation line. The following example shows the correct way to do this :
+    ```python
+    # Hanging indents :
+    foo = some_random_func(
+        arg1, arg2,
+        arg3, arg4)
+    ```
+    see [PEP8-identation](https://www.python.org/dev/peps/pep-0008/#indentation).
 - Imports: 
   - Imports should be in alphabetical order.
   - Imports should usually be on separate lines.
@@ -310,27 +332,67 @@ This rule is not made to be coercitive and to force you to rewrite all your code
 
 ### R010 - Comments
 
-Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention.
+Add a textual comment in English before each line or block of lines to help reviewers understand your train of thought or intention. There are three types of comments that are used depending on the context:
+- #### Inline comments
+    An inline comment is a comment on the same line as the code. Inline comments should be separated by at least two spaces from the code. They should start with a # and a single space. For example :
+    ```python
+     name = "MEDomics"    # We assign a new value to the variable name
+    ```
+- #### Block comments
+    Block of comments is a multi-inline comments, each line starts with a # and a single space. It is generally applied to the code the follows them and have the same indentation as that code. For example :
+    ```python
+    # We use * for multiplication of numbers
+    # Finally we use print() function to print the value function
+    print(3 * 7)
+    ```
+- #### Documentation strings
+    Usually called 'docstrings'. Used most of the times to describe what the method does and should appear under the <em>def</em> line. For good docstings conventions refer to [R009](#r009---docstring---pep-257---google-style).
+
 
 ### R011 - String Quotes
 
 Use either ' OR " for strings delimiters, but not both.
 
-### R012 - f-strings
+### R012 - f-strings and r-strings
 
-The most useful way to manage strings in Python is the f-string, which was introduced in Python 3.6. Use f-strings whenever possible to enhance code readability. More details can be found at the following link: https://docs.python.org/3/reference/lexical_analysis.html#f-strings.
+- #### f-strings
 
-Example:
+    The most useful way to manage strings in Python is the f-string, which was introduced in Python 3.6. Use f-strings whenever possible to enhance code readability. More details can be found at the following link: https://docs.python.org/3/reference/lexical_analysis.html#f-strings.
 
-```python
-builder_name = "Bob"
+    Example:
 
-print(f'Hi there, my name is {builder_name}')
+    ```python
+    builder_name = "Bob"
 
-hourly_wage = 99.91 # Hourly wage in dollars
+    print(f'Hi there, my name is {builder_name}')
 
-print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
-```
+    hourly_wage = 99.91 # Hourly wage in dollars
+
+    print(f'I work long hours! The total price for a day is {24 * hourly_wage:.2f}')
+    ```
+
+- #### r-strings
+
+    r-strings or Python raw string is a string with the prefix 'r' or 'R'. r-string treats backslach(\\) as literal character and not as an escape caracter.
+
+    Example:
+
+    ```python
+    s = "Hel\lo"
+    raw_s = r"Hello"
+
+    print(f's : {s}')
+
+    print(f'raw_s : {raw_s}')
+    ```
+
+    Output:
+
+    ```python
+    Hel\lo
+    Hello
+    ```
+To discover more about different types of string prefix refer to : https://docs.python.org/3/reference/lexical_analysis.html#literals
 
 ### R013 - Multiprocessing and Compilation
 
@@ -488,8 +550,49 @@ class Square:
     def from_decimeter(cls, side_length_in_dm: float):
         return cls(side_length_in_cm=side_length_in_dm*10)
 ```
+- @property: A built-in decorator for the property() function in python. It makes the functions act as getters, setters or deleters. This is explained best with an example:
+```python
+class Person:
 
-- @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of 'with torch.no_grad():'
+	def __init__(self, name):
+		self._name = name
+
+	@property
+	def price(self):
+		return self._name
+	
+	@price.setter
+	def name(self, new_name):
+        if isinstance(new_name, str):
+		    self._name = new_name
+        else:
+            print("Please enter a valid name")
+
+	@price.deleter
+	def name(self):
+		del self._name
+```
+-@deprecated : A python decorator to deprecate old python classes, functions or methods. Example of usage:
+```python
+from deprecated import deprecated
+
+class Person(object):
+    @deprecated
+    def some_old_method(self):
+        print(self._name)
+```
+You can use it with a "reason" message to help choose another alternative:
+```python
+from deprecated import deprecated
+
+class Person(object):
+    @deprecated(reason="This is an old method, use show_name() instead")
+    def some_old_method(self):
+        print(self._name)
+```
+- @torch.no_grad(): deactivate autograd in PyTorch, for example when calculating validation losses without performing a backward pass on the model weights, equivalent of <em>with torch.no_grad():</em>
+
+Python has more awesome decorators for you, find out more about it here : [Python awesome decorators](https://github.com/lord63/awesome-python-decorator).
 
 ### R018 - Project Requirements
 
