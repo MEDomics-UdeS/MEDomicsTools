@@ -16,6 +16,7 @@ This document presents the PostgreSQL coding standard of the MEDomicsTools team.
     + [R004 - Real databases](#r004---real-databases)
   * [PostgreSQL](#postgresql)
   * [Python](#python)
+  * [Real databases](#real-databases)
 
 NOTES:
 
@@ -42,11 +43,10 @@ A        | 2021-11-18 | Creation    |
 - [ ] PostgreSQL section : queries et autres à partir du même exemple jouet : Guillaume
 - [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160)
 - [X] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
-- [ ] MIMIC: Add concepts tabs creation : Oli
-- [ ] MIMIC and eICU: add table description : Oli
-- [ ] Add table creation (And file to create the sapsii-24h tab) : Oli
+- [X] MIMIC and eICU: add table description : Oli
+- [ ] Add table creation (And files to create the sapsii-24h tab) : Oli -> À faire plus tard
 - [ ] Faire une database jouet avec user jouet pour pratiquer les opérations : Nic?
-- [ ] Transférer PGadmin à DataGrip: Oli
+- [ ] Transférer PGadmin à DataGrip: Oli -> À revoir
 
 ## PgAdmin
 ### R000 - Recommended Software
@@ -183,36 +183,6 @@ That is in the database "security" tab, 'PUBLIC' or user is granted connect priv
 'PUBLIC' or user is granted usage privileges.
 
 
-### R004 - Real databases
-
-
-#### Mimic-IV
-##### Database creation
-
-To create the Mimic-IV database, follow these next steps:
-
-- You will first need to download the Mimic data from [Physionet](https://mimic.mit.edu/).
-- You then need to download the [Mimic-code](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv).
-- You then only have to follow the steps given on the [mimic project](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv/buildmimic/postgres).
-
-#### eICU
-##### Database creation
-To create the eICU database, follow these next steps:
-
-- Download the [eICU data](https://eicu-crd.mit.edu/).
-- Download the [eICU code](https://github.com/MIT-LCP/eicu-code).
-- Follow the [building steps](https://github.com/MIT-LCP/eicu-code/tree/master/build-db/postgres).
-- However, you may need to specify a user and a database name while creating the eICU database.
-- To do so, add the following parameters to the creation queries:
-  - DBUSER=postgresUser (the postgresUser must be able to create a database)
-  - DBPASS=password  (The password of the postgresUser)
-  - DBNAME=DBNAME  (The name that you want to use for the database)
-- The creation queries will then be as:
-  - make initialize DBUSER=user DBPASS=password DBNAME=eicu
-  - make eicu-gz datadir=/data/dir DBUSER=user DBPASS=password DBNAME=eicu
-
-
-
 ## PostgreSQL
 
 ## Python
@@ -286,3 +256,37 @@ with conn.cursor() as curs:
                       columns=columns)
     
 ````
+
+
+## Real databases
+For a fairly detailed description and comparison of the Mimic and eICU databases, see [Mimic & eICU](https://doc.griis.usherbrooke.ca:8443/pages/viewpage.action?pageId=53772717)
+
+### Mimic-IV
+[Mimic](https://mimic.mit.edu/)  is a large, single-center database comprising information relating to patients admitted to critical care units at a large tertiary care hospital.
+
+		#### Database creation
+
+To create the Mimic-IV database, follow these next steps:
+
+- You will first need to download the Mimic data from [Physionet](https://mimic.mit.edu/).
+- You then need to download the [Mimic-code](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv).
+- You then only have to follow the steps given on the [mimic project](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv/buildmimic/postgres).
+
+### eICU
+The [eICU](https://eicu-crd.mit.edu/) Collaborative Research Database is a multi-center database comprising deidentified health data
+associated with over 200,000 admissions to ICUs across the United States between 2014-2015.
+
+#### Database creation
+To create the eICU database, follow these next steps:
+
+- Download the [eICU data](https://eicu-crd.mit.edu/).
+- Download the [eICU code](https://github.com/MIT-LCP/eicu-code).
+- Follow the [building steps](https://github.com/MIT-LCP/eicu-code/tree/master/build-db/postgres).
+- However, you may need to specify a user and a database name while creating the eICU database.
+- To do so, add the following parameters to the creation queries:
+- DBUSER=postgresUser (the postgresUser must be able to create a database)
+- DBPASS=password  (The password of the postgresUser)
+- DBNAME=DBNAME  (The name that you want to use for the database)
+- The creation queries will then be as:
+- make initialize DBUSER=user DBPASS=password DBNAME=eicu
+- make eicu-gz datadir=/data/dir DBUSER=user DBPASS=password DBNAME=eicu
