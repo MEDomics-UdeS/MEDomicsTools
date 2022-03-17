@@ -30,6 +30,7 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
     - [R017 - Decorators](#r017---decorators)
     - [R018 - Project Requirements](#r018---project-requirements)
+    - [R019 - Distributing Python Modules](#r019---distributing-python-modules)
 
 NOTES: 
 
@@ -42,6 +43,7 @@ NOTES:
 - [Alexandre Ayotte](https://github.com/AleAyotte)
 - [Mahdi Ait Lhaj Loutfi](https://github.com/MahdiAll99)
 - [Martin Vallières](https://github.com/mvallieres)
+- [Maxence Larose](https://github.com/MaxenceLarose)
 - [Nicolas Raymond](https://github.com/Rayn2402)
 - [Olivier Lefebvre](https://github.com/Olivier998)
 - [Simon Giard-Leroux](https://github.com/sgiardl)
@@ -65,7 +67,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
 - [ ] Regex (Alex)
-- [ ] Creating PyPI packages (Maxence)
+- [x] Creating PyPI packages (Maxence)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Alex)
 - [x] Lines wrapping/continuation (Mahdi)
 - [x] r-strings (Mahdi)
@@ -618,3 +620,14 @@ Then, simply run the following command in the root folder of your project:
 # USE THIS
 pipreqs --force
 ```
+
+### R019 - Distributing Python Modules
+
+This [repository](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction) presents a minimal example of a properly structured python package. It also contains a [pdf presentation](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction/blob/main/DistributingPythonModules.pdf) (french only) that shows the main aspects of distributing a python module, namely
+
+- What's a package?
+- PyPI
+- Project structure
+- Automatic documentation
+- Continuous integration using GitHub Actions
+
