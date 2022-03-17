@@ -623,7 +623,7 @@ pipreqs --force
 
 ### R019 - Distributing Python Modules
 
-This [repository](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction) presents a minimal example of a properly structured python package. It also contains a [pdf presentation](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction/blob/main/DistributingPythonModules.pdf) (french only) that shows the main aspects of distributing a python module, namely
+This [repository](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction) presents a minimal example of a properly structured python package. It also contains a [pdf presentation](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction/blob/main/DistributingPythonModules.pdf) (french only) that explains the main aspects of distributing a python module, namely
 
 - What's a package?
 - PyPI
