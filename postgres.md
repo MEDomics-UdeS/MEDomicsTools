@@ -16,6 +16,7 @@ This document presents the PostgreSQL coding standard of the MEDomicsTools team.
     + [R004 - Real databases](#r004---real-databases)
   * [PostgreSQL](#postgresql)
   * [Python](#python)
+  * [Real databases](#real-databases)
 
 NOTES:
 
@@ -37,16 +38,15 @@ A        | 2021-11-18 | Creation    |
 
 - [X] Table of contents
 - [X] Server creation
-- [ ] Database creation : ajout d'un exemple jouet : Guillaume
+- [X] Database creation : ajout d'un exemple jouet : Guillaume
 - [X] User creation and modification
 - [ ] PostgreSQL section : queries et autres à partir du même exemple jouet : Guillaume
-- [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160)
+- [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160) : Oli
 - [X] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
-- [ ] MIMIC: Add concepts tabs creation : Oli
-- [ ] MIMIC and eICU: add table description : Oli
-- [ ] Add table creation (And file to create the sapsii-24h tab) : Oli
+- [X] MIMIC and eICU: add table description : Oli
+- [ ] Add table creation (And files to create the sapsii-24h tab) : Oli -> À faire plus tard
 - [ ] Faire une database jouet avec user jouet pour pratiquer les opérations : Nic?
-- [ ] Transférer PGadmin à DataGrip: Oli
+- [ ] Transférer PGadmin à DataGrip: Oli -> À revoir
 
 ## PgAdmin
 ### R000 - Recommended Software
@@ -101,14 +101,83 @@ Next time you want to access your server in pgAdmin:
 - Open pgAdmin on your local computer
 - Double-click on the newly created server icon and enter your password
 
-
-
-
-
-
 ### R002 - Database creation
 
+### *Installing PostgreSQL*
+Firstly, you will need to install the PostgreSQL package from your distribution repository.
+```
+sudo apt update && sudo apt install postgresql
+```
 
+While installing PostgreSQL, the package also creates a postgres system user to manage your database. You will need to switch to this user to initialize and create your database. There are many privilege elevation program available but we recommend `su` which should already be on your system by default.
+```
+# Changing to the postgres user
+sudo su postgres
+```
+Note: Commands that should be run as the postgres user are prefixed by `[postgres]$`.
+
+Once connected with the postgres user, the database cluster can be initialized.
+```
+[postgres]$ initdb -D /var/lib/postgres/data
+```
+
+`-D` is the default location for the database cluster. It can be changed to suit your specific database needs but we recommend using this one for general purposes. By default, the database will use the locale and encoding of your installation specified by the `$LANG` variable.
+
+You can verify which one is set on your computer by using this command:
+```
+locale -a
+```
+
+You can also override these defaults settings by using these arguments:
+- <code>--locale=<i>locale</i></code>, where locale is to be chosen amongst the system's available locales;
+- <code>-E <i>encoding</i></code>, for the encoding (which must match the chosen locale);
+
+Example:
+```
+[postgres]$ initdb --locale=en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data
+```
+
+Many lines should now appear on the screen with several ending by ...ok and one line telling you the process has succeeded. You can now return to the regular user using the `exit` command.
+
+Finally, you will need to `start` and `enable` the postgresql.service
+```
+# Starting the service
+sudo systemctl start postgresql.service
+```
+```
+# Enabling the service
+sudo systemctl enable postgresql.service
+```
+
+### *Create your first database/user*
+We recommend creating a PostgreSQL role/user with the same name as your Linux username. It allows you to access the PostgreSQL database shell without having to specify a user to login (which makes it quite convenient).
+
+We will go into more details on how to create a user in [R003 - User creation and modification](#r003---user-creation-and-modification), but this section will cover a very simple way to create a user and database from the shell without the need for additionnal software.
+
+Become the postgres user. Add a new database role/user using the createuser command:
+```
+# Creating a new database user
+[postgres]$ createuser --interactive
+```
+
+You can now create a new database using the `createdb` command from your login shell.
+```
+# Creating the database
+createdb DATABASE_NAME
+```
+
+If you database-user has the same name/role as your Linux user, it will already have read/write privileges on your created database.
+
+Otherwise add <code>-O <i>database-username</i></code> to the `createdb`  command like so:
+```
+createdb DATABASE_NAME -O MY_USER
+```
+
+To access your database from the shell, you can use this command:
+```
+psql -d DATABASE_NAME
+```
+You can quit the psql shell by typing `\q` or `Ctrl+D`.
 
 ### R003 - User creation and modification
 To execute these steps, you must already have access to a postgres user account with create roles privileges.  
@@ -181,36 +250,6 @@ If the user can not access specified schemas or databases (assuming you did step
 For a user to have access to schemas, these schemas and the databases must be accessible for the user.  
 That is in the database "security" tab, 'PUBLIC' or user is granted connect privileges, AND in every schemas "security" tab,  
 'PUBLIC' or user is granted usage privileges.
-
-
-### R004 - Real databases
-
-
-#### Mimic-IV
-##### Database creation
-
-To create the Mimic-IV database, follow these next steps:
-
-- You will first need to download the Mimic data from [Physionet](https://mimic.mit.edu/).
-- You then need to download the [Mimic-code](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv).
-- You then only have to follow the steps given on the [mimic project](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv/buildmimic/postgres).
-
-#### eICU
-##### Database creation
-To create the eICU database, follow these next steps:
-
-- Download the [eICU data](https://eicu-crd.mit.edu/).
-- Download the [eICU code](https://github.com/MIT-LCP/eicu-code).
-- Follow the [building steps](https://github.com/MIT-LCP/eicu-code/tree/master/build-db/postgres).
-- However, you may need to specify a user and a database name while creating the eICU database.
-- To do so, add the following parameters to the creation queries:
-  - DBUSER=postgresUser (the postgresUser must be able to create a database)
-  - DBPASS=password  (The password of the postgresUser)
-  - DBNAME=DBNAME  (The name that you want to use for the database)
-- The creation queries will then be as:
-  - make initialize DBUSER=user DBPASS=password DBNAME=eicu
-  - make eicu-gz datadir=/data/dir DBUSER=user DBPASS=password DBNAME=eicu
-
 
 
 ## PostgreSQL
@@ -286,3 +325,37 @@ with conn.cursor() as curs:
                       columns=columns)
     
 ````
+
+
+## Real databases
+For a fairly detailed description and comparison of the Mimic and eICU databases, see [Mimic & eICU](https://doc.griis.usherbrooke.ca:8443/pages/viewpage.action?pageId=53772717)
+
+### Mimic-IV
+[Mimic](https://mimic.mit.edu/)  is a large, single-center database comprising information relating to patients admitted to critical care units at a large tertiary care hospital.
+
+		#### Database creation
+
+To create the Mimic-IV database, follow these next steps:
+
+- You will first need to download the Mimic data from [Physionet](https://mimic.mit.edu/).
+- You then need to download the [Mimic-code](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv).
+- You then only have to follow the steps given on the [mimic project](https://github.com/MIT-LCP/mimic-code/tree/main/mimic-iv/buildmimic/postgres).
+
+### eICU
+The [eICU](https://eicu-crd.mit.edu/) Collaborative Research Database is a multi-center database comprising deidentified health data
+associated with over 200,000 admissions to ICUs across the United States between 2014-2015.
+
+#### Database creation
+To create the eICU database, follow these next steps:
+
+- Download the [eICU data](https://eicu-crd.mit.edu/).
+- Download the [eICU code](https://github.com/MIT-LCP/eicu-code).
+- Follow the [building steps](https://github.com/MIT-LCP/eicu-code/tree/master/build-db/postgres).
+- However, you may need to specify a user and a database name while creating the eICU database.
+- To do so, add the following parameters to the creation queries:
+- DBUSER=postgresUser (the postgresUser must be able to create a database)
+- DBPASS=password  (The password of the postgresUser)
+- DBNAME=DBNAME  (The name that you want to use for the database)
+- The creation queries will then be as:
+- make initialize DBUSER=user DBPASS=password DBNAME=eicu
+- make eicu-gz datadir=/data/dir DBUSER=user DBPASS=password DBNAME=eicu
