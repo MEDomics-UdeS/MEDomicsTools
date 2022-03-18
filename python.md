@@ -30,6 +30,7 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
     - [R017 - Decorators](#r017---decorators)
     - [R018 - Project Requirements](#r018---project-requirements)
+    - [R019 - Class inheritance vs Aggregation](#r019---class-inheritance-vs-aggregation)
 
 NOTES: 
 
@@ -58,7 +59,7 @@ A        | 2021-08-08 | Creation    |
 
 ## To-Do
 
-- [ ] Class inheritance vs aggregation (Mahdi)
+- [x] Class inheritance vs aggregation (Mahdi)
 - [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
 - [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
 - [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
@@ -618,3 +619,35 @@ Then, simply run the following command in the root folder of your project:
 # USE THIS
 pipreqs --force
 ```
+### R019 - Class inheritance vs Aggregation
+
+In Python, class inheritance allows the definition of class that inherits all methods and properties from another class. The class that inherits is called **child class** or **derived class** and the class inherited from is called **parent class** or **base class**. In the following example we create a parent class called ***Teacher*** with the property ***name*** and a child class called ***Student*** that will have the same property as its parent class :
+
+```python
+class Teacher:
+    def __init__(self, name):
+        self.name = name
+    
+class Student(Teacher):
+    def __init__(self, name):
+        super().__init__(name)
+``` 
+
+On the other hand, aggregation is when an object can access another object, which means both objects can exist independently. In other words, the parent only contains a reference to the child. In the following example, we see that each object ***person*** is associated with a ***country***, but the ***country*** can exist without the ***person***:
+
+```python
+class Country:
+    def __init__(self, name, capital):
+        self.name = name
+        self.capital = capital
+        
+class Person:
+    def __init__(self, name, country):
+        self.name = name
+        self.country = country
+```
+The question now is: When to use aggregation or inheritance?
+- If the new class needs most of the functionality of the original class, use inheritance.    
+- If the new class has a different behavior than the original class and needs to change, use aggregation.
+
+In a nutshell, we use aggregation, if part of the original class needs to be changed and we use inheritance, if we need almost all of the functionality of the original class without major changes
