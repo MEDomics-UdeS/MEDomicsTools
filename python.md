@@ -67,7 +67,7 @@ A        | 2021-08-08 | Creation    |
 - [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
-- [ ] Regex (Alex)
+- [ ] Regex (Guillaume)
 - [x] Creating PyPI packages (Maxence)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Alex)
 - [x] Lines wrapping/continuation (Mahdi)
