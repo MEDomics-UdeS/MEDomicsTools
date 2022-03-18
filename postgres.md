@@ -101,14 +101,83 @@ Next time you want to access your server in pgAdmin:
 - Open pgAdmin on your local computer
 - Double-click on the newly created server icon and enter your password
 
-
-
-
-
-
 ### R002 - Database creation
 
+### *Installing PostgreSQL*
+Firstly, you will need to install the PostgreSQL package from your distribution repository.
+```
+sudo apt update && sudo apt install postgresql
+```
 
+While installing PostgreSQL, the package also creates a postgres system user to manage your database. You will need to switch to this user to initialize and create your database. There are many privilege elevation program available but we recommend `su` which should already be on your system by default.
+```
+# Changing to the postgres user
+sudo su postgres
+```
+Note: Commands that should be run as the postgres user are prefixed by `[postgres]$`.
+
+Once connected with the postgres user, the database cluster can be initialized.
+```
+[postgres]$ initdb -D /var/lib/postgres/data
+```
+
+`-D` is the default location for the database cluster. It can be changed to suit your specific database needs but we recommend using this one for general purposes. By default, the database will use the locale and encoding of your installation specified by the `$LANG` variable.
+
+You can verify which one is set on your computer by using this command:
+```
+locale -a
+```
+
+You can also override these defaults settings by using these arguments:
+- <code>--locale=<i>locale</i></code>, where locale is to be chosen amongst the system's available locales;
+- <code>-E <i>encoding</i></code>, for the encoding (which must match the chosen locale);
+
+Example:
+```
+[postgres]$ initdb --locale=en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data
+```
+
+Many lines should now appear on the screen with several ending by ...ok and one line telling you the process has succeeded. You can now return to the regular user using the `exit` command.
+
+Finally, you will need to `start` and `enable` the postgresql.service
+```
+# Starting the service
+sudo systemctl start postgresql.service
+```
+```
+# Enabling the service
+sudo systemctl enable postgresql.service
+```
+
+### *Create your first database/user*
+We recommend creating a PostgreSQL role/user with the same name as your Linux username. It allows you to access the PostgreSQL database shell without having to specify a user to login (which makes it quite convenient).
+
+We will go into more details on how to create a user in [R003 - User creation and modification](#r003---user-creation-and-modification), but this section will cover a very simple way to create a user and database from the shell without the need for additionnal software.
+
+Become the postgres user. Add a new database role/user using the createuser command:
+```
+# Creating a new database user
+[postgres]$ createuser --interactive
+```
+
+You can now create a new database using the `createdb` command from your login shell.
+```
+# Creating the database
+createdb DATABASE_NAME
+```
+
+If you database-user has the same name/role as your Linux user, it will already have read/write privileges on your created database.
+
+Otherwise add <code>-O <i>database-username</i></code> to the `createdb`  command like so:
+```
+createdb DATABASE_NAME -O MY_USER
+```
+
+To access your database from the shell, you can use this command:
+```
+psql -d DATABASE_NAME
+```
+You can quit the psql shell by typing `\q` or `Ctrl+D`.
 
 ### R003 - User creation and modification
 To execute these steps, you must already have access to a postgres user account with create roles privileges.  
