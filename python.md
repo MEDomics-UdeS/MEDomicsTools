@@ -239,7 +239,7 @@ Follow all rules of the PEP 8 when coding in Python. The following list presents
         arg1, arg2,
         arg3, arg4)
     ```
-    see [PEP8-identation](https://www.python.org/dev/peps/pep-0008/#indentation).
+    see [PEP8-indentation](https://www.python.org/dev/peps/pep-0008/#indentation).
 - Imports: 
   - Imports should be in alphabetical order.
   - Imports should usually be on separate lines.
@@ -325,7 +325,7 @@ Write a docstring at the beginning of each Python .py file containing the follow
 
 Write a docstring at the beginning of each class describing the general purpose of the class, the public methods and public attributes available.
 
-Write a docstring at the beginning of each function or method to describe the function/method purpose, arguments type and expected values and return type and expected values. Place this docstring right after the defintion of the function/method.
+Write a docstring at the beginning of each function or method to describe the function/method purpose, arguments type and expected values and return type and expected values. Place this docstring right after the definition of the function/method.
 
 Follow PEP 257: https://www.python.org/dev/peps/pep-0257/
 
@@ -376,7 +376,7 @@ Use either ' OR " for strings delimiters, but not both.
 
 - #### r-strings
 
-    r-strings or Python raw string is a string with the prefix 'r' or 'R'. r-string treats backslach(\\) as literal character and not as an escape caracter.
+    r-strings or Python raw string is a string with the prefix 'r' or 'R'. r-string treats backslach(\\) as literal character and not as an escape character.
 
     Example:
 
@@ -411,7 +411,7 @@ It is also possible to use the GPU to perform some calculations to improve perfo
 
 ### R014 - Enumerations - PEP 435
 
-Enumerations allow a simple interface between human-readable string values and numerical values. For example, if you want your class to have a method with a color as an argument, you can specify all possible colors using an enumeration, each being associated to an integer value. This can improve the interactibility and optimize your classes.
+Enumerations allow a simple interface between human-readable string values and numerical values. For example, if you want your class to have a method with a color as an argument, you can specify all possible colors using an enumeration, each being associated to an integer value. This can improve the intractability and optimize your classes.
 
 Read the standard library documentation on enumerations: https://docs.python.org/3/library/enum.html
 
