@@ -38,10 +38,10 @@ A        | 2021-11-18 | Creation    |
 
 - [X] Table of contents
 - [X] Server creation
-- [ ] Database creation : ajout d'un exemple jouet : Guillaume
+- [X] Database creation : ajout d'un exemple jouet : Guillaume
 - [X] User creation and modification
 - [ ] PostgreSQL section : queries et autres à partir du même exemple jouet : Guillaume
-- [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160)
+- [ ] Résumé de ce [site](https://towardsdatascience.com/10-essential-psql-commands-for-data-engineers-c1ea42279160) : Oli
 - [X] Python : Commandes pratiques et interaction entre Python et postgresql avec exemple jouet : Nic
 - [X] MIMIC and eICU: add table description : Oli
 - [ ] Add table creation (And files to create the sapsii-24h tab) : Oli -> À faire plus tard
