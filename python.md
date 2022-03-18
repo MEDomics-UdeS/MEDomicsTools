@@ -30,7 +30,8 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R016 - Encapsulation - Private vs Protected vs Public](#r016---encapsulation---private-vs-protected-vs-public)
     - [R017 - Decorators](#r017---decorators)
     - [R018 - Project Requirements](#r018---project-requirements)
-    - [R019 - Class inheritance vs Aggregation](#r019---class-inheritance-vs-aggregation)
+    - [R019 - Distributing Python Modules](#r019---distributing-python-modules)
+    - [R020 - Class inheritance vs Aggregation](#r020---class-inheritance-vs-aggregation)
 
 NOTES: 
 
@@ -43,6 +44,7 @@ NOTES:
 - [Alexandre Ayotte](https://github.com/AleAyotte)
 - [Mahdi Ait Lhaj Loutfi](https://github.com/MahdiAll99)
 - [Martin Vallières](https://github.com/mvallieres)
+- [Maxence Larose](https://github.com/MaxenceLarose)
 - [Nicolas Raymond](https://github.com/Rayn2402)
 - [Olivier Lefebvre](https://github.com/Olivier998)
 - [Simon Giard-Leroux](https://github.com/sgiardl)
@@ -66,7 +68,7 @@ A        | 2021-08-08 | Creation    |
 - [ ] Start file and folder names in repository with lower case letters (Alex)
 - [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
 - [ ] Regex (Alex)
-- [ ] Creating PyPI packages (Maxence)
+- [x] Creating PyPI packages (Maxence)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Alex)
 - [x] Lines wrapping/continuation (Mahdi)
 - [x] r-strings (Mahdi)
@@ -619,7 +621,18 @@ Then, simply run the following command in the root folder of your project:
 # USE THIS
 pipreqs --force
 ```
-### R019 - Class inheritance vs Aggregation
+
+### R019 - Distributing Python Modules
+
+This [repository](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction) presents a minimal example of a properly structured python package. It also contains a [pdf presentation](https://github.com/MaxenceLarose/ProgFest-PackageDistributionIntroduction/blob/main/DistributingPythonModules.pdf) (french only) that explains the main aspects of distributing a python module, namely
+
+- What's a package?
+- PyPI
+- Project structure
+- Automatic documentation
+- Continuous integration using GitHub Actions
+
+### R020 - Class inheritance vs Aggregation
 
 In Python, class inheritance allows the definition of class that inherits all methods and properties from another class. The class that inherits is called **child class** or **derived class** and the class inherited from is called **parent class** or **base class**. In the following example we create a parent class called ***Teacher*** with the property ***name*** and a child class called ***Student*** that will have the same property as its parent class :
 
@@ -650,4 +663,4 @@ The question now is: When to use aggregation or inheritance?
 - If the new class needs most of the functionality of the original class, use inheritance.    
 - If the new class has a different behavior than the original class and needs to change, use aggregation.
 
-In a nutshell, we use aggregation, if part of the original class needs to be changed and we use inheritance, if we need almost all of the functionality of the original class without major changes
+In a nutshell, we use aggregation, if part of the original class needs to be changed and we use inheritance, if we need almost all of the functionality of the original class without major changes.
