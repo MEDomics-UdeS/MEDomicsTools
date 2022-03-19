@@ -32,6 +32,7 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R018 - Project Requirements](#r018---project-requirements)
     - [R019 - Distributing Python Modules](#r019---distributing-python-modules)
     - [R020 - Class inheritance vs Aggregation](#r020---class-inheritance-vs-aggregation)
+    - [R021 - Debugging and Logging](#r021---debugging-and-logging)
 
 NOTES: 
 
@@ -74,7 +75,7 @@ A        | 2021-08-08 | Creation    |
 - [x] r-strings (Mahdi)
 - [x] Add new decorators in 'Decorators' section (https://github.com/lord63/awesome-python-decorator) (Mahdi)
 - [x] Add details in the 'Comments' section, ie. when to use # or """ or ''' (Mahdi)
-- [ ] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
+- [x] Add section on debugging (ie. use an IDE's debugger and not print statements everywhere) and the use of the 'logging' package (https://docs.python.org/2.7/library/logging.html) (Mahdi)
 
 ## Standard
 
@@ -664,3 +665,48 @@ The question now is: When to use aggregation or inheritance?
 - If the new class has a different behavior than the original class and needs to change, use aggregation.
 
 In a nutshell, we use aggregation, if part of the original class needs to be changed and we use inheritance, if we need almost all of the functionality of the original class without major changes.
+
+### R021 - Debugging and Logging
+
+Debugging is to go through your code step by step, to find where you exactly made a mistake. Once you have determined the bug, you find a fix, you apply it and finally test it. Most IDEs provide debugging tools like [Visual Studio](https://docs.microsoft.com/en-us/visualstudio/python/tutorial-working-with-python-in-visual-studio-step-04-debugging?view=vs-2022) or [PyCharm](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html) that will help you monitor the code while it's running and examine it carefully. You can set breakpoints that indicated where to pause the code so you can take a look at the values of variables, or the behavior of memory, or the sequence in which code runs.
+
+Another useful tool for programmers is **Logging**. It helps programmers develop a better understanding of the flow of the program and the scenarios that might happen while running it. The [logging module](https://docs.python.org/3/library/logging.html) helps you integrate your log messages so that it can be used to log events. By default, there are 5 standard levels indicating the severity of events. Each has a corresponding method that can be used to log events at that level of severity. The defined levels, in order of increasing severity, are the following:
+- DEBUG
+- INFO
+- WARNING
+- ERROR
+- CRITICAL
+
+And it can be called as shown in this example : 
+```python
+import logging 
+
+logging.debug('This is a debug message')
+logging.info('This is an info message')
+logging.warning('This is a warning message')
+logging.error('This is an error message')
+logging.critical('This is a critical message')
+```
+
+To go even further, we can add our specific configuration to the logging, for example, we can specify a logging file rather than using the console:
+
+```python
+import logging
+
+logging.basicConfig(filename='myapp.log')
+logging.warning('This warning message will get logged to myapp.log')
+```
+
+Then we can also use it to log our exceptions information:
+
+```python
+logging.info('Started running')
+a = 5
+b = 0
+try:
+  c = a / b
+except Exception as e:
+  logging.exception(f"Exception occurred: {e}")
+```
+
+We encourage you to refer to the [logging module website](https://docs.python.org/3/library/logging.html) to learn more about the other useful features that it has to offer.
