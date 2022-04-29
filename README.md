@@ -5,3 +5,4 @@ This repository contains coding standards, tips and tricks for the MEDomicsLab t
 - [Linux Tips](linux.md)
 - [Postgres Standard](postgres.md)
 - [Python Coding Standard](python.md)
+- [Good Practices](good_practices.md)
