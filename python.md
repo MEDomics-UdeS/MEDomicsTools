@@ -33,6 +33,8 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R019 - Distributing Python Modules](#r019---distributing-python-modules)
     - [R020 - Class inheritance vs Aggregation](#r020---class-inheritance-vs-aggregation)
     - [R021 - Debugging and Logging](#r021---debugging-and-logging)
+    - [R022 - File and Folder Names](#r022---file-and-folder-names)
+    - [R023 - Positional and Keyword Argument](#r023---positional-and-keyword-argument)
 
 NOTES: 
 
@@ -66,8 +68,8 @@ A        | 2021-08-08 | Creation    |
 - [x] decorators : staticmethod classmethod abstractmethod (Nicolas)
 - [x] Function/method calls : specify 1 or multiple arguments per line? (Nicolas)
 - [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
-- [ ] Start file and folder names in repository with lower case letters (Alex)
-- [ ] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
+- [x] Start file and folder names in repository with lower case letters (Alex)
+- [x] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
 - [ ] Regex (Hakima)
 - [x] Creating PyPI packages (Maxence)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Alex)
@@ -710,3 +712,60 @@ except Exception as e:
 ```
 
 We encourage you to refer to the [logging module website](https://docs.python.org/3/library/logging.html) to learn more about the other useful features that it has to offer.
+
+### R022 - File and Folder Names
+For some aesthetic reasons, the name of every file and folder in your project repository should begin with a lower case letter.
+
+### R023 - Positional and Keyword Argument
+In python, there are two ways to pass an argument to a function/method as input. The first way is by position, its mean that arguments are passed in the function/method in the same order has they have been defined in the function definition. The second way is by keyword and it means that you will use a keyword to indicate which parameter should take the argument value. One could use both positional and keyword arguments in a function/method call but only if the positional arguments precede all keyword arguments. Also, you cannot skip a parameter between two positional arguments. 
+
+```python
+def get_mean_accuracy(recalls: Sequence[float], 
+                      geometric_mean: bool = True) -> float:
+    """
+    Compute the mean accuracy according to the recalls of each class.
+
+    :param recalls: A list of float that represent the recall of each class.
+    :param geometric_mean: If true, the geometric mean is used. Else the euclidian mean will be used.
+    :return: The mean accuracy.
+    """
+    if geometric_mean:
+        return np.prod(recalls) ** (1 / len(recalls))
+    else:
+        return float(np.mean(recalls))
+	
+
+recall_list = [0.7, 0.6]
+
+# Positonal arguments
+geo_mean_recall = get_mean_accuracy(recall_list, True)
+
+# Keyword arguments
+geo_mean_recall = get_mean_accuracy(recalls=recall_list, geometric_mean=True)
+
+# Positional and keyword arguments
+geo_mean_recall = get_mean_accuracy(recall_list, geometric_mean=True)
+```
+
+#### Force keyword argument with *
+Consider the method below. If you love risk and/or if you're an idiot, you could be tempted to only use positional argument when calling this function and since there are a lot of parameters that have the same type, you could easily make an error. A way to force the user to use keyword arguments is by using the * in the function definition. All parameters that come after the * would be keyword only parameters.
+```
+def fit(self,
+	model: Union[NeuralNet, ResNet2D],
+        trainset: Union[BrainDataset, RenalDataset],
+        validset: Union[BrainDataset, RenalDataset],
+	*,
+        batch_size: int = 32,
+        device: str = "cuda:0",
+        eps: float = 1e-4,
+        eta_min: float = 1e-4,
+        gamma: float = 2.,
+        grad_clip: float = 0,
+        learning_rate: float = 1e-3,
+        l2: float = 1e-4,
+        mode: str = "standard",
+        mom: float = 0.9,
+        num_cumulated_batch: int = 1,
+        num_epoch: int = 200,
+        optim: str = "Adam") -> None:
+``
