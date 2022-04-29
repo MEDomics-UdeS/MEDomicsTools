@@ -21,14 +21,43 @@ A        | 2022-04-28 | Creation    |
 
 ## To-Do
 
-- [ ] Learning rate warmup
-- [ ] 
+- [x] Learning rate warmup
+- [x] Transfer Cool Links
 
 ## Good Practices
 
+### Cool Links
+- Deep Learning Drizzle: https://deep-learning-drizzle.github.io/?s=03
+- INF8953DE - Reinforcement Learning Course:
+    - Main Website: https://chandar-lab.github.io/INF8953DE/
+    - Course Playlist: https://www.youtube.com/playlist?list=PLImtCgowF_ES_JdF_UcM60EXTcGZg67Ua)
+- NetworkX to draw graphs: https://towardsdatascience.com/visualizing-networks-in-python-d70f4cbeb259
+- Hiddenlayer to draw block diagrams from PyTorch model: https://github.com/waleedka/hiddenlayer
+- Ontology Tutorial: https://protegewiki.stanford.edu/wiki/Protege4Pizzas10Minutes
+- Very cool business card: https://bruno-simon.com/
+- Made with ML: https://madewithml.com/?utm_campaign=Made+With+ML&utm_medium=email&utm_source=Revue+newsletter
+- Imaging data:
+    - MedMNIST: https://medmnist.com/
+    - NMDID: https://nmdid.unm.edu/
+- Simpson's Paradox: https://compucademy.net/exploring-simpsons-paradox-with-python/
+- PyTorch Profiler: https://pytorch.org/blog/introducing-pytorch-profiler-the-new-and-improved-performance-tool/
+- Python @cache decorator:
+    - Video: https://www.youtube.com/watch?v=DnKxKFXB4NQ
+    - Tutorial: https://realpython.com/lru-cache-python/
+- Python Numba:
+    - Video: https://www.youtube.com/watch?v=x58W9A2lnQc
+    - Main Page: https://numba.pydata.org/
+- Machine Learning Datasets: https://sebastianraschka.com/blog/2021/ml-dl-datasets.html
+- Machine Learning Basic Code:
+    - Machine Learning From Scratch: https://github.com/eriklindernoren/ML-From-Scratch
+    - Machine Learning for Big Code and Naturalness: https://ml4code.github.io/papers.html
+- Nvidia AI Playground: https://www.nvidia.com/en-us/research/ai-playground/
+- Comet.ml: https://www.comet.ml/site/
+- Optuna: https://optuna.org/
+
 ### Learning Rate Warmup
 
-A warmup period can be used at the start of training for a few epochs before reaching the peak learning rate.
+A simple linear warmup period can be used at the start of training for a few epochs before reaching the peak learning rate. For the Adam optimizer, this can improve early-stage training stability by regulating the size of the parameter updates. The prevalent warmup schedule is a simple linear warmup, in which the global learning rate starts at zero and increases by a constant at each iteration until reaching its intended value.
 
 See the following paper for details: [On the adequacy of untuned warmup for adaptive optimization](https://arxiv.org/abs/1910.04209)
 
@@ -77,4 +106,5 @@ def __build_scheduler(
     )
 
 ```
+
 
