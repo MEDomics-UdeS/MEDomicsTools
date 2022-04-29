@@ -35,6 +35,8 @@ See the following paper for details: [On the adequacy of untuned warmup for adap
 The following is an example of implementation in PyTorch:
 
 ```python
+from torch.optim.lr_scheduler import CosineAnnealingLR, LinearLR, SequentialLR
+
 def __build_scheduler(
     self,
     n_warmup: int,
