@@ -57,6 +57,7 @@ NOTES:
 
 Revision | Date       | Description |
 ---------| -----------| ----------- |
+F        | 2022-06-01 | Added multiple new sections    |
 E        | 2022-02-10 | Added 'pipreqs' details    |
 D        | 2021-12-01 | Updated based on team's comments    |
 C        | 2021-10-04 | Added new items in to-do list    |
@@ -71,7 +72,7 @@ A        | 2021-08-08 | Creation    |
 - [x] Use 'pipreqs' package to generate project 'requirements.txt' file (Simon)
 - [x] Start file and folder names in repository with lower case letters (Alex)
 - [x] Bare * in arguments list to force use of keyword arguments and prevent positional arguments (Alex)
-- [ ] Regex (Hakima)
+- [x] Regex (Hakima)
 - [x] Creating PyPI packages (Maxence)
 - [ ] Section on 'is' (identity), '==' (equality), 'Falsy/Truthy' vs 'True/False' (https://www.freecodecamp.org/news/truthy-and-falsy-values-in-python/) (Alex)
 - [x] Lines wrapping/continuation (Mahdi)
