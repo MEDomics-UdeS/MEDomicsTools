@@ -35,6 +35,7 @@ This document presents the Python coding standard of the MEDomicsLab team. It al
     - [R021 - Debugging and Logging](#r021---debugging-and-logging)
     - [R022 - File and Folder Names](#r022---file-and-folder-names)
     - [R023 - Positional and Keyword Argument](#r023---positional-and-keyword-argument)
+    - [R024 - Regular Expressions](#r024---regular-expressions)
 
 NOTES: 
 
@@ -768,4 +769,49 @@ def fit(self,
         num_cumulated_batch: int = 1,
         num_epoch: int = 200,
         optim: str = "Adam") -> None:
-``
+```
+
+### R024 - Regular Expressions
+
+A Regular Expression is a sequence of characters that forms a search pattern to operate on strings, it defines a set of rules for the strings we want to match. RegEx are available in python through the [re](https://docs.python.org/3/library/re.html#module-re) module.
+
+The [re](https://docs.python.org/3/library/re.html#module-re) module provides some functions to check if a string matches with a RE. 
+
+| Function  | Description |
+| ------------- | ------------- |
+| *match()* | Check if the beginning of the string matches the RE. |
+| *search()*  | Look for a match from any location of the string. |
+| *sub()*  | Replace one or many matches with a specific string. |
+
+Metacharacters are characters which have a special meaning in a RE:
+| Metacharacter  | Description | RE | String |
+| ------------- | ------------- | ------------- | ------------- |
+| [ ] | A set of characters. | [a-z] | S**cience** |
+| ^ | The beginning of the string. | ^M | **MEDomics Lab** |
+| $ | The end of the string. | $b | **MEDomics Lab** |
+| \| | Either or. | ^(u\|w) | **universe** |
+
+A special sequence in a RE is a **\\** followed by a specific character and has a specific meaning:
+| Special sequence  | Description | RE | String |
+| ------------- | ------------- | ------------- | ------------- |
+| \\A | Matches if the spcified characters are at the beginning of the string. | \\AHello | **Hello World** |
+| \\d | Matches where the string contains digits. | \\d | It is **2022**! |
+| \\S | Matches where the string does not contain white spaces. | \\S | **It matches with each character exepct the white space!** |
+| \\Z | Matches if the spcified characters are at the end of the string. | \\Z(ing) | **It's matching** |
+
+For a complete listing, refer to [the official documentation](https://docs.python.org/3/library/re.html#re.search).
+
+Example:
+
+```python
+import re
+
+txt = "It's raining on april 28th"
+
+# Search for digits in the string 
+x = re.search("\d", txt) # True
+
+ # Replace each digit with 9
+x = re.sub("\d", "9", txt) # x = "It's raining on april 99th"
+
+```

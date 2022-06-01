@@ -1,0 +1,110 @@
+# MEDomicsTools Good Practices
+
+This document presents the good practices to use for various deep learning applications.
+
+## Table of Contents
+
+NOTES: 
+
+- To update the Table of Contents, use: https://ecotrust-canada.github.io/markdown-toc/
+- Section headers cannot contain special characters other than -, otherwise the TOC hyperlinks will not work
+
+## Contributors
+
+- [Simon Giard-Leroux](https://github.com/sgiardl)
+
+## Changelog
+
+Revision | Date       | Description |
+---------| -----------| ----------- |
+A        | 2022-04-28 | Creation    |
+
+## To-Do
+
+- [x] Learning rate warmup
+- [x] Transfer Cool Links
+
+## Good Practices
+
+### Cool Links
+- Deep Learning Drizzle: https://deep-learning-drizzle.github.io/?s=03
+- INF8953DE - Reinforcement Learning Course:
+    - Main Website: https://chandar-lab.github.io/INF8953DE/
+    - Course Playlist: https://www.youtube.com/playlist?list=PLImtCgowF_ES_JdF_UcM60EXTcGZg67Ua)
+- NetworkX to draw graphs: https://towardsdatascience.com/visualizing-networks-in-python-d70f4cbeb259
+- Hiddenlayer to draw block diagrams from PyTorch model: https://github.com/waleedka/hiddenlayer
+- Ontology Tutorial: https://protegewiki.stanford.edu/wiki/Protege4Pizzas10Minutes
+- Very cool business card: https://bruno-simon.com/
+- Made with ML: https://madewithml.com/?utm_campaign=Made+With+ML&utm_medium=email&utm_source=Revue+newsletter
+- Imaging data:
+    - MedMNIST: https://medmnist.com/
+    - NMDID: https://nmdid.unm.edu/
+- Simpson's Paradox: https://compucademy.net/exploring-simpsons-paradox-with-python/
+- PyTorch Profiler: https://pytorch.org/blog/introducing-pytorch-profiler-the-new-and-improved-performance-tool/
+- Python @cache decorator:
+    - Video: https://www.youtube.com/watch?v=DnKxKFXB4NQ
+    - Tutorial: https://realpython.com/lru-cache-python/
+- Python Numba:
+    - Video: https://www.youtube.com/watch?v=x58W9A2lnQc
+    - Main Page: https://numba.pydata.org/
+- Machine Learning Datasets: https://sebastianraschka.com/blog/2021/ml-dl-datasets.html
+- Machine Learning Basic Code:
+    - Machine Learning From Scratch: https://github.com/eriklindernoren/ML-From-Scratch
+    - Machine Learning for Big Code and Naturalness: https://ml4code.github.io/papers.html
+- Nvidia AI Playground: https://www.nvidia.com/en-us/research/ai-playground/
+- Comet.ml: https://www.comet.ml/site/
+- Optuna: https://optuna.org/
+
+### Learning Rate Warmup
+
+A simple linear warmup period can be used at the start of training for a few epochs before reaching the peak learning rate. For the Adam optimizer, this can improve early-stage training stability by regulating the size of the parameter updates. The prevalent warmup schedule is a simple linear warmup, in which the global learning rate starts at zero and increases by a constant at each iteration until reaching its intended value.
+
+See the following paper for details: [On the adequacy of untuned warmup for adaptive optimization](https://arxiv.org/abs/1910.04209)
+
+The following is an example of implementation in PyTorch:
+
+```python
+from torch.optim.lr_scheduler import CosineAnnealingLR, LinearLR, SequentialLR
+
+def __build_scheduler(
+    self,
+    n_warmup: int,
+    n_epochs: int,
+    warmup_floor: float = 0.1,
+    decay_floor: float = 0.1,
+) -> Any:
+    """Method to build the scheduler for training.
+    Args:
+        n_warmup (int): number of warmup epochs
+        n_epochs (int): number of total epochs
+        warmup_floor (float, optional): learning rate ratio when starting the warmup phase. Defaults to 0.1.
+        decay_floor (float, optional): learning rate ratio when decaying during the decay phase. Defaults to 0.1.
+    Returns:
+        any: scheduler
+    """
+    # Sets a warmup period for the learning rate
+    # https://arxiv.org/pdf/1910.04209.pdf
+    warmup_scheduler = LinearLR(
+        optimizer=self.__optimizer,
+        start_factor=warmup_floor,
+        end_factor=1.0,
+        total_iters=n_warmup,
+    )
+
+    # Reduces the learning rate after warmup period
+    decay_scheduler = CosineAnnealingLR(
+        optimizer=self.__optimizer,
+        T_max=n_epochs - n_warmup,
+        eta_min=self.__learning_rate * decay_floor,
+    )
+
+    # Creating the scheduler
+    return SequentialLR(
+        optimizer=self.__optimizer,
+        schedulers=[warmup_scheduler, decay_scheduler],
+        milestones=[n_warmup + 1],
+    )
+
+```
+
+
