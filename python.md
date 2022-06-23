@@ -153,7 +153,7 @@ for i in range(len(my_list)):
     sum = sum + my_list[i]
     
 # Good Pythonic Vectorized Way
-my_sum = sum(my_list)### R018 - Project Requirements
+my_sum = sum(my_list)
 ```
 - Use List Comprehension as much as possible. For example, to filter out a list:
 ```python
