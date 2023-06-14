@@ -23,6 +23,7 @@ A        | 2022-04-28 | Creation    |
 
 - [x] Learning rate warmup
 - [x] Transfer Cool Links
+- [ ] Mixed Precision
 
 ## Good Practices
 
